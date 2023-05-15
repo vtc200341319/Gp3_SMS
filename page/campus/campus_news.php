@@ -9,6 +9,7 @@
 
         <div id="news-container">
             <?php
+            session_start();
             require_once 'connectdb.php';
 
             $items_per_page = 5;
@@ -30,7 +31,9 @@
                     echo "<h2>{$row['topic']}</h2>";
                     echo "<p class='news-date'>{$row['issueDate']}</p>";
                     echo "<p>{$row['content']}</p>";
-                    echo "<button class='delete-btn' onclick='confirmDelete(\"{$row['topic']}\", {$row['campusNewsID']})'>Delete</button>";
+                    if ($_SESSION['type'] == "A") {
+                        echo "<button class='delete-btn' onclick='confirmDelete(\"{$row['topic']}\", {$row['campusNewsID']})'>Delete</button>";
+                    }
                     echo "</div>";
                 }
             } else {
@@ -57,8 +60,9 @@
             }
             ?>
         </div>
-
+        <?php if ($_SESSION['type'] == "A") : ?>
         <button id="add-news-btn">Add News</button>
+         <?php endif; ?> 
 
         <div id="popup-box">
             <form method="POST" action="add_news.php">

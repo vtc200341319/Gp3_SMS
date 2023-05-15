@@ -204,8 +204,8 @@ session_start();
                         <h2 class="zh" lang="zh">學校中心</h2>    
                         <div class="accordion">
                             <div class="accordion-item">
-                                <div class="accordion-header"                                   
-                                     <a href="#" class="en" lang="en">eLibrary Service</a>
+                                <div class="accordion-header" >                                
+                                      <a href="# " class="en" lang="en">eLibrary Service</a>
                                     <a href="# " class="zh" lang="zh">網上圖書館服務</a>     
                                     <span class="accordion-icon"></span>
                                 </div>
@@ -327,9 +327,7 @@ session_start();
                                     <a href="createAcc.php" target="ifeame_admin" class="en" lang="en">Add User</a>
                                     <a href="createAcc.php" target="ifeame_admin" class="zh" lang="zh">添加用戶</a>  
                                     <p><a href="listuser.php" target="ifeame_admin" class="en" lang="en">List User</a>
-                                        <a href="listuser.php" target="ifeame_admin" class="zh" lang="zh">列出用戶</a>  </p>
-                                    <p><a href="# " class="en" lang="en">Change Password</a>
-                                        <a href="# " class="zh" lang="zh">更改密碼</a>  </p>
+                                        <a href="listuser.php" target="ifeame_admin" class="zh" lang="zh">列出用戶</a>  </p>                                   
                                 </div>
                             </div>
 

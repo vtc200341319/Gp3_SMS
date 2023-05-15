@@ -31,9 +31,42 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
             th {
                 background-color: #4CAF50;
                 color: white;
-            }               
+            }
             #searchInput {
                 width:290px;
+            }
+            .modal {
+                display: none;
+                position: fixed;
+                z-index: 1;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                overflow: auto;
+                background-color: rgba(0, 0, 0, 0.4);
+            }
+
+            .modal-content {
+                background-color: #fefefe;
+                margin: 15% auto;
+                padding: 20px;
+                border: 1px solid #888;
+                width: 30%;
+            }
+
+            .close {
+                color: #aaa;
+                float: right;
+                font-size: 28px;
+                font-weight: bold;
+            }
+
+            .close:hover,
+            .close:focus {
+                color: black;
+                text-decoration: none;
+                cursor: pointer;
             }
         </style>
         <script>
@@ -87,7 +120,7 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <th>Login Email</th>
                 <th>Type</th>
                 <th>State</th>               
-                <th colspan="2">Actions</th>
+                <th colspan="3">Actions</th>
             </tr>
             <tbody id="userTable">
                 <?php foreach ($users as $user) { ?>
@@ -98,14 +131,54 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <td class="type"><?php echo $user['type']; ?></td>
                         <td class="state"><?php echo $user['state']; ?></td>
                         <td>
-                            <a href="closeAcc.php?loginID=<?php echo $user['loginID']; ?>" onclick="return confirm('Are you sure you want to close this account?')">Close</a>
+                            <a href="closeAcc.php?loginID=<?php echo $user['loginID']; ?>" onclick="return confirm('Are you sure you want to close <?php echo $user['loginID']; ?> account?')">Close</a>
                         </td>
                         <td>
-                            <a href="resumeAcc.php?loginID=<?php echo $user['loginID']; ?>" onclick="return confirm('Are you sure you want to resume this account?')">Resume</a>
+                            <a href="resumeAcc.php?loginID=<?php echo $user['loginID']; ?>" onclick="return confirm('Are you sure you want to resume <?php echo $user['loginID']; ?> account?')">Resume</a>
                         </td>
+                        <td id="resetPassword-<?php echo $user['loginID']; ?>">Reset Password</td>
                     </tr>
                 <?php } ?>
             </tbody>
         </table>
+
+        <div id="passwordResetModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <form method="post" action="reset_password.php">
+                    <h2>Reset Password</h2>
+                    <p id="resetPasswordLoginIdText">Login ID: </p>
+                    <input type="hidden" id="resetPasswordLoginId" name="loginID" value="">
+                    <p>New Password: <input type="password" name="newPassword" required></p>
+                    <p>Confirm Password: <input type="password" name="confirmPassword" required></p>
+                    <button type="submit">Reset Password</button>
+                </form>
+
+            </div>
+        </div>
+
+        <script>
+            $(document).ready(function () {
+
+                $("[id^='resetPassword-']").on("click", function () {
+                    var loginId = $(this).attr('id').split('-')[1];
+                    $("#resetPasswordLoginId").val(loginId);
+                    $("#resetPasswordLoginIdText").text("Login ID: " + loginId);
+                    $("#passwordResetModal").show();
+                });
+
+                $(".close").on("click", function () {
+                    $("#passwordResetModal").hide();
+                });
+
+                $(window).on("click", function (event) {
+                    if ($(event.target).is(".modal")) {
+                        $(".modal").hide();
+                    }
+                });
+            });
+        </script>
+
     </body>
+</html>
 
