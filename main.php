@@ -246,8 +246,8 @@ session_start();
                             </div> 
                             <div class="accordion-item">
                                 <div class="accordion-header">
-                                    <a href="# " class="en" lang="en">Interactive Q&A</a>
-                                    <a href="# " class="zh" lang="zh">互動問答</a>     
+                                    <a href="qa_system.php" target="ifeame_center" class="en" lang="en">Interactive Q&A</a>
+                                    <a href="qa_system.php" target="ifeame_center" class="zh" lang="zh">互動問答</a>     
                                 </div>
                             </div>   
 
@@ -276,8 +276,8 @@ session_start();
                             </div>
                             <div class="accordion-item">
                                 <div class="accordion-header">
-                                    <a href="# " class="en" lang="en">Exercise</a>
-                                    <a href="# " class="zh" lang="zh">練習筆記</a>  
+                                    <a  href="ex_upload.php" target="ifeame_teacher" class="en" lang="en">Exercise</a>
+                                    <a href="ex_upload.php" target="ifeame_teacher" class="zh" lang="zh">練習筆記</a>  
                                 </div>
                             </div>
                             <div class="accordion-item">
@@ -302,7 +302,7 @@ session_start();
                         </div>
                     </td>
                     <td class="iframtd">
-                        <iframe src="" title="Test"></iframe>
+                        <iframe src="" title="Teacher" name = 'ifeame_teacher'></iframe>
                     </td>
                 </tr>
             </table>

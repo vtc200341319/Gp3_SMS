@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: May 15, 2023 at 09:18 AM
+-- Generation Time: May 15, 2023 at 10:03 AM
 -- Server version: 8.0.31
 -- PHP Version: 8.0.26
 
@@ -800,6 +800,86 @@ INSERT INTO `polling` (`PollingID`, `startTime`, `endTime`, `question`, `firstCh
 (3, '2023-06-10', '2023-06-15', 'What is your favorite food?', 'Pizza', 'Sushi', 'Burger', 'Fried chicken', 'ALL', NULL, 0, 0, 0, 0),
 (4, '2023-07-04', '2023-07-08', 'What is your favorite season?', 'Spring', 'Summer', 'Fall', 'Winter', 'ALL', NULL, 0, 0, 0, 0),
 (5, '2023-08-20', '2023-08-25', 'What is your favorite animal?', 'Dog', 'Cat', 'Horse', 'Rabbit', 'ALL', NULL, 0, 0, 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `qa_answers`
+--
+
+DROP TABLE IF EXISTS `qa_answers`;
+CREATE TABLE IF NOT EXISTS `qa_answers` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `question_id` int DEFAULT NULL,
+  `answer` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `question_id` (`question_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `qa_answers`
+--
+
+INSERT INTO `qa_answers` (`id`, `question_id`, `answer`) VALUES
+(1, 1, 'A school management system is a system used to manage data related to students, teachers, courses, and grades in a school.'),
+(2, 2, 'You can use the add function in the student management module to add a new student.'),
+(3, 3, 'You can use the search function in the student management module to search for student data.'),
+(4, 4, 'You can use the edit function in the student management module to edit student data.'),
+(5, 5, 'You can use the delete function in the student management module to delete a student.'),
+(6, 6, 'You can use the add function in the teacher management module to add a new teacher.'),
+(7, 7, 'You can use the search function in the teacher management module to search for teacher data.'),
+(8, 8, 'You can use the edit function in the teacher management module to edit teacher data.'),
+(9, 9, 'You can use the delete function in the teacher management module to delete a teacher.'),
+(10, 10, 'You can use the add function in the timetable management module to schedule a timetable for classes.'),
+(11, 11, 'You can use the search function in the timetable management module to search for timetable information.'),
+(12, 12, 'You can use the search function in the timetable management module to search for timetable information.'),
+(13, 13, 'You can use the edit function in the timetable management module to edit the timetable.'),
+(14, 14, 'You can use the delete function in the timetable management module to delete a timetable entry.'),
+(15, 15, 'You can use the add function in the grades management module to record student grades.'),
+(16, 16, 'You can use the search function in the grades management module to search for student grades.'),
+(17, 17, 'You can use the edit function in the grades management module to edit student grades.'),
+(18, 18, 'You can use the delete function in the grades management module to delete student grades.'),
+(19, 19, 'You can use the generate function in the report card generation module to generate report cards.'),
+(20, 20, 'You can use the search function in the report card generation module to search for report cards.');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `qa_questions`
+--
+
+DROP TABLE IF EXISTS `qa_questions`;
+CREATE TABLE IF NOT EXISTS `qa_questions` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `question` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `qa_questions`
+--
+
+INSERT INTO `qa_questions` (`id`, `question`) VALUES
+(1, 'What is a school management system?'),
+(2, 'How to add a new student?'),
+(3, 'How to search for student data?'),
+(4, 'How to edit student data?'),
+(5, 'How to delete a student?'),
+(6, 'How to add a new teacher?'),
+(7, 'How to search for teacher data?'),
+(8, 'How to edit teacher data?'),
+(9, 'How to delete a teacher?'),
+(10, 'How to schedule a timetable for classes?'),
+(11, 'How to search for timetable information?'),
+(12, 'How to edit the timetable?'),
+(13, 'How to delete a timetable entry?'),
+(14, 'How to record student grades?'),
+(15, 'How to search for student grades?'),
+(16, 'How to edit student grades?'),
+(17, 'How to delete student grades?'),
+(18, 'How to generate report cards?'),
+(19, 'How to search for report cards?'),
+(20, 'How to print report cards?');
 
 -- --------------------------------------------------------
 
