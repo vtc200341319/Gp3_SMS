@@ -1,7 +1,6 @@
 <?php
-require_once 'connectdb.php';
+require_once '../../connectdb.php';
 
-// Add a new book
 if (isset($_POST['add_book'])) {
     $isbn = $_POST['isbn'];
     $book_name = $_POST['book_name'];
@@ -12,21 +11,20 @@ if (isset($_POST['add_book'])) {
     $book_language = $_POST['book_language'];
     $book_available_quantity = $_POST['book_available_quantity'];
 
-    $sql = "INSERT INTO bookdetails (ISBN, bookName, bookAuthor, bookPublishYear, bookPublishPlace, bookCatergory, bookLanguage, bookAvailableQuatity, bookViewQuatity) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO book_details (ISBN, bookName, bookAuthor, bookPublishYear, bookPublishPlace, bookCatergory, bookLanguage, bookAvailableQuatity, bookViewQuatity) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([$isbn, $book_name, $book_author, $book_publish_year, $book_publish_place, $book_category, $book_language, $book_available_quantity, 0]);
 
     header('Location: eLibrary.php');
 }
 
-// Search for a book
-$limit = 10; // Number of records to display per page
-$page = isset($_GET['page']) ? (int) $_GET['page'] : 1; // Get the current page number
+$limit = 10;
+$page = isset($_GET['page']) ? (int) $_GET['page'] : 1; 
 $start = ($page - 1) * $limit;
 if (isset($_POST['search_book'])) {
     $search_term = $_POST['search_term'];
 
-    $sql = "SELECT * FROM bookdetails WHERE bookName LIKE ? OR bookAuthor LIKE ? OR ISBN LIKE ? ORDER BY ISBN";
+    $sql = "SELECT * FROM book_details WHERE bookName LIKE ? OR bookAuthor LIKE ? OR ISBN LIKE ? ORDER BY ISBN";
     $stmt = $pdo->prepare($sql);
     $stmt->execute(["%$search_term%", "%$search_term%", "%$search_term%"]);
     $books = $stmt->fetchAll();
@@ -36,7 +34,7 @@ if (isset($_POST['search_book'])) {
     $stmt->execute(["%$search_term%", "%$search_term%", "%$search_term%"]);
     $books = $stmt->fetchAll();
 } else {
-    $sql = "SELECT * FROM bookdetails ORDER BY ISBN";
+    $sql = "SELECT * FROM book_details ORDER BY ISBN";
     $stmt = $pdo->query($sql);
     $books = $stmt->fetchAll();
     $total_books = count($books);
@@ -47,18 +45,16 @@ if (isset($_POST['search_book'])) {
 
 $total_pages = ceil($total_books / $limit);
 
-// Borrow a book
 if (isset($_POST['borrow_book'])) {
     $book_id = $_POST['book_id'];
 
-
-    $sql = "SELECT bookAvailableQuatity FROM bookdetails WHERE bookID = ?";
+    $sql = "SELECT bookAvailableQuatity FROM book_details WHERE bookID = ?";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([$book_id]);
     $row = $stmt->fetch();
 
     if ($row['bookAvailableQuatity'] > 0) {
-        $sql = "UPDATE bookdetails SET bookAvailableQuatity = bookAvailableQuatity - 1, bookViewQuatity = bookViewQuatity + 1 WHERE bookID = ?";
+        $sql = "UPDATE book_details SET bookAvailableQuatity = bookAvailableQuatity - 1, bookViewQuatity = bookViewQuatity + 1 WHERE bookID = ?";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$book_id]);
 
@@ -76,14 +72,11 @@ if (isset($_POST['borrow_book'])) {
     }
 }
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
         <title>eLibrary</title>
-
         <link href="../../css/eLibrary.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -228,7 +221,7 @@ if (isset($_POST['borrow_book'])) {
                         </div>
                     </div>
                 </div>  
-                <script src="../../js/eLibrary.js" type="text/javascript"></script>
+
             </div>
 
-
+            <script src="../../js/eLibrary.js" type="text/javascript"></script>

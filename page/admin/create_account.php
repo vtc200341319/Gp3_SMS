@@ -1,6 +1,6 @@
 <?php
 
-include('connectdb.php');
+include('../../connectdb.php');
 
 $loginName = $_POST["loginName"];
 $loginEmail = $_POST["loginEmail"];

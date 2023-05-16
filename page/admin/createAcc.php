@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>Create Account</title>
-        <link rel="stylesheet" href="css/createAcc.css">
+        <link href="../../css/createAcc.css" rel="stylesheet" type="text/css"/>
         <script>
             function validatePassword() {
                 var password = document.getElementById("loginPassword").value;
@@ -23,7 +23,7 @@
 
             <?php
           
-            include('connectdb.php');
+            include('../../connectdb.php');
             
             $stmt = $pdo->prepare("SELECT loginID FROM login WHERE loginID LIKE :prefix ORDER BY loginID DESC LIMIT 1");
             $stmt->bindValue(':prefix', date("Y") . '%');
@@ -68,7 +68,7 @@
                 <option value="">--Please Select Security Question--</option>
                 <?php
                 
-                include('connectdb.php');
+                include('../../connectdb.php');
 
               
                 $stmt = $pdo->prepare("SELECT * FROM SecurityQuestion");

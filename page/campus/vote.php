@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once('connectdb.php');
+require_once('../../connectdb.php');
 
 if (!isset($_GET['pid'])) {
     die("PollingID is missing");

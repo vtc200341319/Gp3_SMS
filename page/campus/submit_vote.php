@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once('connectdb.php');
+require_once('../../connectdb.php');
 
 if (!isset($_POST['submit_vote'])) {
     header("Location: campus_voting.php");

@@ -1,5 +1,5 @@
 <?php
-require_once('connectdb.php');
+require_once('../../connectdb.php');
 
 $stmt = $pdo->prepare("SELECT * FROM `login`");
 $stmt->execute();
@@ -10,8 +10,7 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>SMS - List User</title>        
-        <link rel="stylesheet" href="css/main.css">
+        <title>SMS - List User</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <style>
             table {

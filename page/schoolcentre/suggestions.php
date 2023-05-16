@@ -1,5 +1,5 @@
 <?php
-require_once 'connectdb.php';
+require_once '../../connectdb.php';
 
 if(isset($_POST['input'])){
     $input = $_POST['input'];

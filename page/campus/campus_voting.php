@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once('connectdb.php');
+require_once('../../connectdb.php');
 
 $currentDateTime = date("Y-m-d H:i:s");
 

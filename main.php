@@ -212,8 +212,8 @@ session_start();
                                 <div class="accordion-content">
                                     <a href="# " class="en" lang="en">Borrowing & Returning Records</a>
                                     <a href="# " class="zh" lang="zh">圖書借還紀錄</a>  
-                                    <p><a href="eLibrary.php" target="ifeame_center" class="en" lang="en">Book Search</a>
-                                        <a href="eLibrary.php" target="ifeame_center" class="zh" lang="zh">尋找圖書</a>  </p>
+                                    <p><a href="page/schoolcentre/eLibrary.php" target="ifeame_center" class="en" lang="en">Book Search</a>
+                                        <a href="page/schoolcentre/eLibrary.php" target="ifeame_center" class="zh" lang="zh">尋找圖書</a>  </p>
                                     <p><a href="# " class="en" lang="en">Book Reserve</a>
                                         <a href="# " class="zh" lang="zh">預約借書</a>  </p>                                   
                                 </div>
@@ -246,8 +246,8 @@ session_start();
                             </div> 
                             <div class="accordion-item">
                                 <div class="accordion-header">
-                                    <a href="qa_system.php" target="ifeame_center" class="en" lang="en">Interactive Q&A</a>
-                                    <a href="qa_system.php" target="ifeame_center" class="zh" lang="zh">互動問答</a>     
+                                    <a href="page/schoolcentre/qa_system.php" target="ifeame_center" class="en" lang="en">Interactive Q&A</a>
+                                    <a href="page/schoolcentre/qa_system.php" target="ifeame_center" class="zh" lang="zh">互動問答</a>     
                                 </div>
                             </div>   
 
@@ -324,10 +324,10 @@ session_start();
                                     <span class="accordion-icon"></span>
                                 </div>
                                 <div class="accordion-content">
-                                    <a href="createAcc.php" target="ifeame_admin" class="en" lang="en">Add User</a>
-                                    <a href="createAcc.php" target="ifeame_admin" class="zh" lang="zh">添加用戶</a>  
-                                    <p><a href="listuser.php" target="ifeame_admin" class="en" lang="en">List User</a>
-                                        <a href="listuser.php" target="ifeame_admin" class="zh" lang="zh">列出用戶</a>  </p>                                   
+                                    <a href="page/admin/createAcc.php" target="ifeame_admin" class="en" lang="en">Add User</a>
+                                    <a href="page/admin/createAcc.php" target="ifeame_admin" class="zh" lang="zh">添加用戶</a>  
+                                    <p><a href="page/admin/listuser.php" target="ifeame_admin" class="en" lang="en">List User</a>
+                                        <a href="page/admin/listuser.php" target="ifeame_admin" class="zh" lang="zh">列出用戶</a>  </p>                                   
                                 </div>
                             </div>
 
@@ -338,10 +338,10 @@ session_start();
                                     <span class="accordion-icon"></span>
                                 </div>
                                 <div class="accordion-content">
-                                    <a href="# " class="en" lang="en">Register</a>
-                                    <a href="# " class="zh" lang="zh">登記</a>  
-                                    <p><a href="# " class="en" lang="en">View Enrollment</a>
-                                        <a href="# " class="zh" lang="zh">查看註冊</a>  </p>                              
+                                    <a href="page/admin/registerStudent.php" target="ifeame_admin" class="en" lang="en">Register</a>
+                                    <a href="page/admin/registerStudent.php" target="ifeame_admin" class="zh" lang="zh">登記</a>  
+                                    <p><a href="page/admin/viewenrollment.php" target="ifeame_admin" class="en" lang="en">View Enrollment</a>
+                                        <a href="page/admin/viewenrollment.php " target="ifeame_admin" class="zh" lang="zh">查看註冊</a>  </p>                              
                                 </div>
                             </div>
 

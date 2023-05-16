@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Interactive Q&A</title>
-    <link href="css/qa_system.css" rel="stylesheet" type="text/css"/>
+    <link href="../../css/qa_system.css" rel="stylesheet" type="text/css"/>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {
@@ -44,7 +44,7 @@
         <div id="suggestions"></div>
 
         <?php
-        require_once 'connectdb.php';
+        require_once '../../connectdb.php';
 
         if(isset($_POST['question'])){
             $question = $_POST['question'];
