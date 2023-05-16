@@ -3,8 +3,7 @@ require_once('../../connectdb.php');
 
 try {
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $studnetID = $_POST["studnetID"];
-        $studentRegNumber = $_POST["studentRegNumber"];
+        $studentRegNumber = getNewStudentRegNumber();
         $studentEngName = $_POST["studentEngName"];
         $studentChiName = $_POST["studentChiName"];
         $studentSex = $_POST["studentSex"];
@@ -15,17 +14,16 @@ try {
         $className = $_POST["className"];
         $parentsRegCode = $_POST["parentsRegCode"];
 
-        if (empty($studentID) || empty($studentRegNumber) || empty($studentEngName) || empty($studentChiName) || empty($studentSex) || empty($studentDateOfBirth) || empty($studentPlaceOfBirth) || empty($studentAddress) || empty($classNumber) || empty($className) || empty($parentsRegCode)) {
+        // Check if any field is empty
+        if (empty($studentRegNumber) || empty($studentEngName) || empty($studentChiName) || empty($studentSex) || empty($studentDateOfBirth) || empty($studentPlaceOfBirth) || empty($studentAddress) || empty($classNumber) || empty($className) || empty($parentsRegCode)) {
             echo "<script>alert('Please fill in all fields'); window.location.href = 'registerStudent.php';</script>";
             exit;
         }
 
-
-        $sql = "INSERT INTO `student`(`studnetID`, `studentRegNumber`, `studentEngName`, `studentChiName`, `studentSex`, `studentDateOfBirth`, `studentPlaceOfBirth`, `studentAddress`, `classNumber`, `className`, `parentsRegCode`)
-                VALUES (:studnetID, :studentRegNumber, :studentEngName, :studentChiName, :studentSex, :studentDateOfBirth, :studentPlaceOfBirth, :studentAddress, :classNumber, :className, :parentsRegCode)";
+        $sql = "INSERT INTO `student`(`studentRegNumber`, `studentEngName`, `studentChiName`, `studentSex`, `studentDateOfBirth`, `studentPlaceOfBirth`, `studentAddress`, `classNumber`, `className`, `parentsRegCode`)
+                VALUES (:studentRegNumber, :studentEngName, :studentChiName, :studentSex, :studentDateOfBirth, :studentPlaceOfBirth, :studentAddress, :classNumber, :className, :parentsRegCode)";
 
         $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':studnetID', $studnetID);
         $stmt->bindParam(':studentRegNumber', $studentRegNumber);
         $stmt->bindParam(':studentEngName', $studentEngName);
         $stmt->bindParam(':studentChiName', $studentChiName);
@@ -44,6 +42,23 @@ try {
 } catch (PDOException $e) {
     die("Failed to insert data: " . $e->getMessage());
 }
+
+function getNewStudentRegNumber() {
+    global $pdo;
+
+    $sql = "SELECT MAX(`studentRegNumber`) AS maxRegNumber FROM `student`";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($result['maxRegNumber']) {
+        $lastNumber = (int) $result['maxRegNumber'];
+        $newNumber = $lastNumber + 1;
+        return $newNumber;
+    } else {
+        return '222300001';
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -55,10 +70,8 @@ try {
     <body>
         <h2>Registration Form</h2>
         <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-            <label for="studnetID">Student ID:</label>
-            <input type="text" name="studnetID" required><br>
             <label for="studentRegNumber">Student Registration Number:</label>
-            <input type="text" name="studentRegNumber" required><br>
+            <input type="text" name="studentRegNumber" value="<?php echo getNewStudentRegNumber(); ?>" readonly><br>
 
             <label for="studentEngName">Student English Name:</label>
             <input type="text" name="studentEngName" required><br>
@@ -66,14 +79,18 @@ try {
             <label for="studentChiName">Student Chinese Name:</label>
             <input type="text" name="studentChiName" required><br>
 
-            <label for="studentSex">Sex:</label>
-            <input type="text" name="studentSex" required><br>
+            <label for="studentSex">Gender:</label>
+            <select name="studentSex" required>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select><br>
 
             <label for="studentDateOfBirth">Date of Birth:</label>
-            <input type="text" name="studentDateOfBirth" required><br>
+            <input type="date" name="studentDateOfBirth" required><br>
 
             <label for="studentPlaceOfBirth">Place of Birth:</label>
-            <input type="text" name="studentPlaceOfBirth" required><br>
+            <input type="text" name="studentPlaceOfBirth" value="Hong Kong" required><br>
 
             <label for="studentAddress">Address:</label>
             <input type="text" name="studentAddress" required><br>
