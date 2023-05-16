@@ -22,9 +22,9 @@
         <label for="return_day">Return Day:</label>
         <input type="date" name="return_day" id="return_day" readonly>
         
-        <label for="reason">Reason:</label>
+        <label for="reason">Remark (option):</label>
         <textarea name="reason" required></textarea>
-
+        <P>
         <input type="submit" value="Submit">
 
         <script>

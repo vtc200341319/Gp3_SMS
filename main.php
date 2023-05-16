@@ -113,6 +113,12 @@ session_start();
                             </div>
                             <div class="accordion-item">
                                 <div class="accordion-header">
+                                    <a href="page/campus/album.php " target="ifeame_campus" class="en" lang="en">Album</a>
+                                    <a href="page/campus/album.php " target="ifeame_campus" class="zh" lang="zh">校園相簿</a>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <div class="accordion-header">
                                     <a href="# " class="en" lang="en">Calendar</a>
                                     <a href="# " class="zh" lang="zh">行事曆</a>
                                     <span class="accordion-icon"></span>
@@ -402,10 +408,10 @@ session_start();
                                     <a href="# " class="en" lang="en">Electronic application</a>
                                     <a href="# " class="zh" lang="zh">電子申請</a>  
                                     <span class="accordion-icon"></span>
-                                </div>
+                                </div>                               
                                 <div class="accordion-content">
-                                    <a href="# " class="en" lang="en">Hoilday</a>
-                                    <a href="# " class="zh" lang="zh">假期</a>
+                                    <a href="page/admin/appholiday.php" target="ifeame_admin"class="en" lang="en">Hoilday</a>
+                                    <a href="page/admin/appholiday.php" target="ifeame_admin"class="zh" lang="zh">假期</a>
                                 </div>
                             </div>
 
