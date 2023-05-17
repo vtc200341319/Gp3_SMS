@@ -1,5 +1,10 @@
 <?php
 session_start();
+
+if (empty($_SESSION['loginID'])) {
+    header("Location: index.php");
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -11,11 +16,10 @@ session_start();
     </head>
 
     <body>       
-
         <h1 class="en" lang="en">School Management System - Menu <span class="clock" id="clock"></h1>
         <h1 class="zh" lang="zh">學校管理系統 - 目錄 <span class="clock" id="clock1"></h1>
 
-        <div class="lang-selector">
+        <div class="lang-selector">            
             <label for="lang-select" ></label>           
             <select id="lang-select" onchange="changeLanguage()">
                 <option value="en">English</option>
@@ -39,7 +43,7 @@ session_start();
                     echo '<button class="tablinks" data-target="teacher"><img src="img/icon/class.png" alt="Teacher workshop" width="35" height="35">&nbsp;Teacher Work Place</button>';
                     echo '<button class="tablinks" data-target="admin"><img src="img/icon/admin.png" alt="Administration" width="35" height="35">&nbsp;Admin Management</button>';
                 }
-            ?>
+                ?>
 
 
                 <div class = "profile">
@@ -211,7 +215,7 @@ session_start();
                         <div class="accordion">
                             <div class="accordion-item">
                                 <div class="accordion-header" >                                
-                                      <a href="# " class="en" lang="en">eLibrary Service</a>
+                                    <a href="# " class="en" lang="en">eLibrary Service</a>
                                     <a href="# " class="zh" lang="zh">網上圖書館服務</a>     
                                     <span class="accordion-icon"></span>
                                 </div>
@@ -299,8 +303,8 @@ session_start();
                                     <span class="accordion-icon"></span>
                                 </div>
                                 <div class="accordion-content">
-                                    <a href="# " class="en" lang="en">Facility Reservation</a>
-                                    <a href="# " class="zh" lang="zh">設施預訂</a>  
+                                    <a href="page/workplace/facilityReservation.php" target="ifeame_teacher" class="en" lang="en">Facility Reservation</a>
+                                    <a href="page/workplace/facilityReservation.php" target="ifeame_teacher" class="zh" lang="zh">設施預訂</a>  
                                     <p><a href="# " class="en" lang="en">Record</a>
                                         <a href="# " class="zh" lang="zh">紀錄</a>  </p>                                                               
                                 </div>

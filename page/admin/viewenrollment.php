@@ -8,7 +8,7 @@
           <P>
         <form method="GET" action="">
             <input type="text" name="filter" placeholder="Name" value="<?php echo isset($_GET['filter']) ? $_GET['filter'] : ''; ?>">
-            <input type="text" name="filterSex" placeholder="Sex" value="<?php echo isset($_GET['filterSex']) ? $_GET['filterSex'] : ''; ?>">
+            <input type="text" name="filterSex" placeholder="Gender" value="<?php echo isset($_GET['filterSex']) ? $_GET['filterSex'] : ''; ?>">
             <input type="text" name="filterDOB" placeholder="Date of birth" value="<?php echo isset($_GET['filterDOB']) ? $_GET['filterDOB'] : ''; ?>">
             <input type="text" name="filterPOB" placeholder="Place of birth" value="<?php echo isset($_GET['filterPOB']) ? $_GET['filterPOB'] : ''; ?>">
             <input type="text" name="filterAddress" placeholder="Address" value="<?php echo isset($_GET['filterAddress']) ? $_GET['filterAddress'] : ''; ?>">
@@ -56,7 +56,7 @@
 
         if ($stmt) {
             echo "<table>";
-            echo "<tr><th>Eng Name</th><th>Chi Name</th><th>Sex</th><th>Date Of Birth</th><th>Place Of Birth</th>
+            echo "<tr><th>Eng Name</th><th>Chi Name</th><th>Gender</th><th>Date Of Birth</th><th>Place Of Birth</th>
       <th>Address</th><th>Class Number</th><th>Class Name</th><th>Parents Reg Code</th></tr>";
 
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {

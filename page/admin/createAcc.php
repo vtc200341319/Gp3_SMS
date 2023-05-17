@@ -22,9 +22,8 @@
         <form action="create_account.php" method="post">
 
             <?php
-          
             include('../../connectdb.php');
-            
+
             $stmt = $pdo->prepare("SELECT loginID FROM login WHERE loginID LIKE :prefix ORDER BY loginID DESC LIMIT 1");
             $stmt->bindValue(':prefix', date("Y") . '%');
             $stmt->execute();
@@ -35,7 +34,7 @@
                 $newLoginID = 1;
             }
             $loginID = date("Y") . sprintf("%04d", $newLoginID);
-          
+
             $stmt = null;
             $pdo = null;
             ?>
@@ -46,7 +45,8 @@
             <label for="loginName">Login Name:</label>
             <input type="text" name="loginName" required><br>
             <label for="loginEmail">Email:</label>
-            <input type="email" name="loginEmail" required><br>
+            <input type="email" name="loginEmail" value="<?php echo $loginID; ?>@sms.com" required><br>
+
 
             <label for="loginPassword">Password:</label>
             <input type="password" name="loginPassword" id="loginPassword" required oninput="validatePassword()"><br>
@@ -67,20 +67,17 @@
             <select name="securityQ" required>
                 <option value="">--Please Select Security Question--</option>
                 <?php
-                
                 include('../../connectdb.php');
 
-              
                 $stmt = $pdo->prepare("SELECT * FROM SecurityQuestion");
                 $stmt->execute();
                 $questions = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-                
                 foreach ($questions as $question) {
                     echo '<option value="' . $question['questionID'] . '">' . $question['question'] . '</option>';
                 }
 
-               
+
                 $stmt = null;
                 $pdo = null;
                 ?>
