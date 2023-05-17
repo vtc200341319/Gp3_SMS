@@ -1,14 +1,15 @@
 <?php
+
 session_start();
-require_once('connectdb.php');
+require_once('../../connectdb.php');
 
 header('Content-Type: application/json');
 $response = array();
 
-if (isset($_POST['username']) && isset($_POST['new_password']) && isset($_POST['confirm_password'])) {
-    $username = $_POST['username'];
-    $new_password = $_POST['new_password'];
-    $confirm_password = $_POST['confirm_password'];
+if (isset($_POST['loginID']) && isset($_POST['newPassword']) && isset($_POST['confirmPassword'])) {
+    $username = $_POST['loginID'];
+    $new_password = $_POST['newPassword'];
+    $confirm_password = $_POST['confirmPassword'];
 
     if ($new_password === $confirm_password) {
         $stmt = $pdo->prepare("SELECT * FROM `login` WHERE (loginID = :username OR loginName = :username OR loginEmail = :username)");

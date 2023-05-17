@@ -144,7 +144,7 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <div id="passwordResetModal" class="modal">
             <div class="modal-content">
                 <span class="close">&times;</span>
-                <form method="post" action="reset_password.php">
+                <form id="resetPasswordForm">
                     <h2>Reset Password</h2>
                     <p id="resetPasswordLoginIdText">Login ID: </p>
                     <input type="hidden" id="resetPasswordLoginId" name="loginID" value="">
@@ -152,6 +152,7 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <p>Confirm Password: <input type="password" name="confirmPassword" required></p>
                     <button type="submit">Reset Password</button>
                 </form>
+
 
             </div>
         </div>
@@ -175,8 +176,33 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         $(".modal").hide();
                     }
                 });
+
+                $('#resetPasswordForm').on('submit', function (e) {
+                    e.preventDefault();
+
+                    var data = $(this).serialize();
+
+                    $.ajax({
+                        url: 'reset_password.php',
+                        type: 'POST',
+                        data: data,
+                        dataType: 'json',
+                        success: function (response) {
+                            if (response.success) {
+                                alert('Password changed successfully!');
+                            } else {
+                                alert('Error: ' + response.error);
+                            }
+                            $("#passwordResetModal").hide();
+                        },
+                        error: function () {
+                            alert('An error occurred. Please try again.');
+                        }
+                    });
+                });
             });
         </script>
+
 
     </body>
 </html>
