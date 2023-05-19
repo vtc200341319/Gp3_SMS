@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: May 15, 2023 at 10:03 AM
+-- Generation Time: May 19, 2023 at 10:23 AM
 -- Server version: 8.0.31
 -- PHP Version: 8.0.26
 
@@ -76,9 +76,9 @@ CREATE TABLE IF NOT EXISTS `booking_facility_application` (
 --
 
 INSERT INTO `booking_facility_application` (`bookFacilityID`, `reason`, `startDate`, `endDate`, `startTime`, `endTime`, `schoolFacilitiesCode`, `approval`, `staffCode`) VALUES
-(1, 'Teachers\' Training', '2023-04-07', '2023-04-07', '14:00:00', '16:00:00', '101', 'Yes', 'CHOWTL'),
-(2, 'EDB Meeting', '2023-04-12', '2023-04-12', '15:00:00', '16:00:00', '401', 'Yes', 'HOTC'),
-(3, 'PTA Meeting', '2023-04-13', '2023-04-13', '18:30:00', '21:00:00', '402', 'Yes', 'YEUNGTL');
+(1, 'Teachers\' Training', '2023-05-07', '2023-05-07', '14:00:00', '16:00:00', 'MET101', 'Yes', 'CHOWTL'),
+(2, 'EDB Meeting', '2023-05-18', '2023-05-18', '13:00:00', '16:00:00', 'MET401', 'Yes', 'HOTC'),
+(3, 'PTA Meeting', '2023-05-17', '2023-05-17', '16:30:00', '20:00:00', 'COM402', 'Yes', 'YEUNGTL');
 
 -- --------------------------------------------------------
 
@@ -535,9 +535,9 @@ CREATE TABLE IF NOT EXISTS `login` (
 --
 
 INSERT INTO `login` (`loginID`, `type`, `loginName`, `loginEmail`, `loginPassword`, `securityQ`, `securityAns`, `state`) VALUES
-(20230001, 'A', 'operator1', 'operator1@sms.edu.hk', '161ebd7d45089b3446ee4e0d86dbcf92', '2', '4b583376b2767b923c3e1da60d10de59', 'Active'),
-(20230002, 'S', 'student1', '200341319@stu.vtc.edu.hk', '161ebd7d45089b3446ee4e0d86dbcf92', '2', '9ab1c5afa4946ca0040271736f38c83a', 'Active'),
-(20230003, 'A', 'operator2', 'oper@sms.com', '161ebd7d45089b3446ee4e0d86dbcf92', '2', '4b583376b2767b923c3e1da60d10de59', 'Active');
+(20220001, 'A', 'operator1', 'operator1@sms.edu.hk', '161ebd7d45089b3446ee4e0d86dbcf92', '2', '4b583376b2767b923c3e1da60d10de59', 'Active'),
+(20220002, 'S', 'student1', '200341319@stu.vtc.edu.hk', '161ebd7d45089b3446ee4e0d86dbcf92', '2', '9ab1c5afa4946ca0040271736f38c83a', 'Active'),
+(20220003, 'A', 'operator2', 'oper@sms.com', '161ebd7d45089b3446ee4e0d86dbcf92', '2', '4b583376b2767b923c3e1da60d10de59', 'Active');
 
 -- --------------------------------------------------------
 
@@ -555,7 +555,7 @@ CREATE TABLE IF NOT EXISTS `loginlog` (
   `loginDateTime` datetime NOT NULL,
   `remark` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`loginlogID`)
-) ENGINE=MyISAM AUTO_INCREMENT=53 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=65 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `loginlog`
@@ -613,7 +613,19 @@ INSERT INTO `loginlog` (`loginlogID`, `loginID`, `type`, `loginName`, `state`, `
 (49, 20230002, 'S', 'student1', 'fail', '2023-05-08 12:34:21', 'wrong password'),
 (50, 20230002, 'S', 'student1', 'success', '2023-05-08 12:34:29', ''),
 (51, 20230001, 'A', 'operator1', 'success', '2023-05-08 12:38:37', ''),
-(52, 20230001, 'A', 'operator1', 'success', '2023-05-15 17:03:14', '');
+(52, 20230001, 'A', 'operator1', 'success', '2023-05-15 17:03:14', ''),
+(53, 20230001, 'A', 'operator1', 'success', '2023-05-15 18:05:08', ''),
+(54, 20230001, 'A', 'operator1', 'success', '2023-05-16 10:40:09', ''),
+(55, 20230001, 'A', 'operator1', 'success', '2023-05-16 11:10:01', ''),
+(56, 20230001, 'A', 'operator1', 'success', '2023-05-16 11:54:40', ''),
+(57, 20230001, 'A', 'operator1', 'success', '2023-05-16 12:41:52', ''),
+(58, 20230001, 'A', 'operator1', 'success', '2023-05-16 18:06:26', ''),
+(59, 20230001, 'A', 'operator1', 'success', '2023-05-17 10:30:59', ''),
+(60, 20230003, 'A', 'operator2', 'fail', '2023-05-17 10:43:26', 'wrong password'),
+(61, 20230003, 'A', 'operator2', 'success', '2023-05-17 10:43:30', ''),
+(62, 20230001, 'A', 'operator1', 'success', '2023-05-17 17:12:34', ''),
+(63, 20230001, 'A', 'operator1', 'success', '2023-05-17 18:05:39', ''),
+(64, 20230001, 'A', 'operator1', 'success', '2023-05-19 17:06:31', '');
 
 -- --------------------------------------------------------
 
@@ -679,39 +691,40 @@ CREATE TABLE IF NOT EXISTS `parents` (
   `parentDateOfBirth` date DEFAULT NULL,
   `parentAddress` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `relationWithStudent` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `studentRegNumber` int NOT NULL,
+  `studentRegNumber` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`parentID`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `parents`
 --
 
 INSERT INTO `parents` (`parentID`, `parentRegCode`, `parentEngName`, `parentChiName`, `parentSex`, `parentDateOfBirth`, `parentAddress`, `relationWithStudent`, `studentRegNumber`) VALUES
-(1, 'parent001', NULL, NULL, 'Female', NULL, 'Hong Kong', 'Mother', 201800001),
-(2, 'parent002', NULL, NULL, 'Female', NULL, 'Hong Kong', 'Mother', 201800002),
-(3, 'parent003', NULL, NULL, 'Female', NULL, 'Hong Kong', 'Mother', 201800003),
-(4, 'parent004', NULL, NULL, 'Female', NULL, 'Hong Kong', 'Mother', 201800004),
-(5, 'parent005', NULL, NULL, 'Male', NULL, 'Hong Kong', 'Father', 201800005),
-(6, 'parent006', NULL, NULL, 'Female', NULL, 'Hong Kong', 'Mother', 201800006),
-(7, 'parent007', NULL, NULL, 'Male', NULL, 'Hong Kong', 'Father', 201800007),
-(8, 'parent008', NULL, NULL, 'Female', NULL, 'Hong Kong', 'Mother', 201800008),
-(9, 'parent009', NULL, NULL, 'Female', NULL, 'Hong Kong', 'Mother', 201900001),
-(10, 'parent010', NULL, NULL, 'Male', NULL, 'Hong Kong', 'Father', 201900002),
-(11, 'parent011', NULL, NULL, 'Female', NULL, 'Hong Kong', 'Mother', 201900003),
-(12, 'parent012', NULL, NULL, 'Male', NULL, 'Hong Kong', 'Father', 201900004),
-(13, 'parent013', NULL, NULL, 'Female', NULL, 'Hong Kong', 'Mother', 201900005),
-(14, 'parent014', NULL, NULL, 'Female', NULL, 'Hong Kong', 'Mother', 201900006),
-(15, 'parent015', NULL, NULL, 'Male', NULL, 'Hong Kong', 'Father', 201900007),
-(16, 'parent016', NULL, NULL, 'Female', NULL, 'Hong Kong', 'Mother', 201900008),
-(17, 'parent017', NULL, NULL, 'Male', NULL, 'Hong Kong', 'Father', 202000001),
-(18, 'parent018', NULL, NULL, 'Female', NULL, 'Hong Kong', 'Mother', 202000002),
-(19, 'parent019', NULL, NULL, 'Male', NULL, 'Hong Kong', 'Father', 202000003),
-(20, 'parent020', NULL, NULL, 'Male', NULL, 'Hong Kong', 'Father', 202000004),
-(21, 'parent021', NULL, NULL, 'Male', NULL, 'Hong Kong', 'Father', 202000005),
-(22, 'parent022', NULL, NULL, 'Female', NULL, 'Hong Kong', 'Mother', 202000006),
-(23, 'parent023', NULL, NULL, 'Female', NULL, 'Hong Kong', 'Mother', 202000007),
-(24, 'parent024', NULL, NULL, 'Female', NULL, 'Hong Kong', 'Mother', 202000008);
+(1, 'p201800001', NULL, NULL, 'Female', NULL, 'Hong Kong', 'Mother', 's201800002'),
+(2, 'p201800002', NULL, NULL, 'Female', NULL, 'Hong Kong', 'Mother', 's201800002'),
+(3, 'p201800003', NULL, NULL, 'Female', NULL, 'Hong Kong', 'Mother', 's201800003'),
+(4, 'p201800004', NULL, NULL, 'Female', NULL, 'Hong Kong', 'Mother', 's201800004'),
+(5, 'p201800005', NULL, NULL, 'Male', NULL, 'Hong Kong', 'Father', 's201800005'),
+(6, 'p201800006', NULL, NULL, 'Female', NULL, 'Hong Kong', 'Mother', 's201800006'),
+(7, 'p201800007', NULL, NULL, 'Male', NULL, 'Hong Kong', 'Father', 's201800007'),
+(8, 'p201800008', NULL, NULL, 'Female', NULL, 'Hong Kong', 'Mother', 's201800008'),
+(9, 'p201900001', NULL, NULL, 'Female', NULL, 'Hong Kong', 'Mother', 's201900001'),
+(10, 'p201900002', NULL, NULL, 'Male', NULL, 'Hong Kong', 'Father', 's201900002'),
+(11, 'p201900003', NULL, NULL, 'Female', NULL, 'Hong Kong', 'Mother', 's201900003'),
+(12, 'p201900004', NULL, NULL, 'Male', NULL, 'Hong Kong', 'Father', 's201900004'),
+(13, 'p201900005', NULL, NULL, 'Female', NULL, 'Hong Kong', 'Mother', 's201900005'),
+(14, 'p201900006', NULL, NULL, 'Female', NULL, 'Hong Kong', 'Mother', 's201900006'),
+(15, 'p201900007', NULL, NULL, 'Male', NULL, 'Hong Kong', 'Father', 's201900007'),
+(16, 'p201900008', NULL, NULL, 'Female', NULL, 'Hong Kong', 'Mother', 's201900008'),
+(17, 'p202000001', NULL, NULL, 'Male', NULL, 'Hong Kong', 'Father', 's202000001'),
+(18, 'p202000002', NULL, NULL, 'Female', NULL, 'Hong Kong', 'Mother', 's202000002'),
+(19, 'p202000003', NULL, NULL, 'Male', NULL, 'Hong Kong', 'Father', 's202000003'),
+(20, 'p202000004', NULL, NULL, 'Male', NULL, 'Hong Kong', 'Father', 's202000004'),
+(21, 'p202000005', NULL, NULL, 'Male', NULL, 'Hong Kong', 'Father', 's202000005'),
+(22, 'p202000006', NULL, NULL, 'Female', NULL, 'Hong Kong', 'Mother', 's202000006'),
+(23, 'p202000007', NULL, NULL, 'Female', NULL, 'Hong Kong', 'Mother', 's202000007'),
+(24, 'p202000008', NULL, NULL, 'Female', NULL, 'Hong Kong', 'Mother', 's202000008'),
+(25, 'p20230001', '123', '123', 'male', '2023-05-14', '123', 'father', 's20230001');
 
 -- --------------------------------------------------------
 
@@ -1338,7 +1351,7 @@ INSERT INTO `staff_penalty_record` (`staffPenaltyRecordID`, `dueDate`, `returnDa
 DROP TABLE IF EXISTS `student`;
 CREATE TABLE IF NOT EXISTS `student` (
   `studnetID` int NOT NULL AUTO_INCREMENT,
-  `studentRegNumber` int NOT NULL,
+  `studentRegNumber` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `studentEngName` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `studentChiName` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `studentSex` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1349,37 +1362,38 @@ CREATE TABLE IF NOT EXISTS `student` (
   `className` varchar(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `parentsRegCode` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`studnetID`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `student`
 --
 
 INSERT INTO `student` (`studnetID`, `studentRegNumber`, `studentEngName`, `studentChiName`, `studentSex`, `studentDateOfBirth`, `studentPlaceOfBirth`, `studentAddress`, `classNumber`, `className`, `parentsRegCode`) VALUES
-(1, 201800001, 'CHAN Yi Shun', '陳以信', 'Male', '2011-08-14', 'Hong Kong', 'Hong Kong', 1, '6A', 'parent001'),
-(2, 201800002, 'CHEUNG Tsz Yu', '張芷如', 'Female', '2011-07-15', 'Hong Kong', 'Hong Kong', 2, '6A', 'parent002'),
-(3, 201800003, 'CHAN Ka Chun', '陳嘉俊', 'Male', '2011-11-28', 'Hong Kong', 'Hong Kong', 1, '6B', 'parent003'),
-(4, 201800004, 'CHEUNG Ka Yan', '張家欣', 'Female', '2011-04-11', 'Hong Kong', 'Hong Kong', 2, '6B', 'parent004'),
-(5, 201800005, 'CHAN Lok Hang', '陳樂行', 'Male', '2011-08-08', 'Hong Kong', 'Hong Kong', 1, '6C', 'parent005'),
-(6, 201800006, 'CHEUNG Tin Yan', '張天恩', 'Female', '2011-08-31', 'Hong Kong', 'Hong Kong', 2, '6C', 'parent006'),
-(7, 201800007, 'CHAN Ka Ho', '陳家豪', 'Male', '2011-10-27', 'Hong Kong', 'Hong Kong', 1, '6D', 'parent007'),
-(8, 201800008, 'CHEUNG Mei Ling', '張美玲', 'Female', '2011-06-17', 'Hong Kong', 'Hong Kong', 2, '6D', 'parent008'),
-(9, 201900001, 'CHAN Chun Kit', '陳俊傑', 'Male', '2012-09-14', 'Hong Kong', 'Hong Kong', 1, '5A', 'parent009'),
-(10, 201900002, 'CHEUNG Hiu Ching', '張曉晴', 'Female', '2012-06-27', 'Hong Kong', 'Hong Kong', 2, '5A', 'parent010'),
-(11, 201900003, 'CHAN Yu Hin', '陳宇軒', 'Male', '2012-04-29', 'Hong Kong', 'Hong Kong', 1, '5B', 'parent011'),
-(12, 201900004, 'CHEUNG Ka Yi', '張嘉儀', 'Female', '2012-06-27', 'Hong Kong', 'Hong Kong', 2, '5B', 'parent012'),
-(13, 201900005, 'CHAN Ho Yin', '陳浩賢', 'Male', '2012-09-04', 'Hong Kong', 'Hong Kong', 1, '5C', 'parent013'),
-(14, 201900006, 'CHEUNG Sze Nga', '張詩雅', 'Female', '2012-06-24', 'Hong Kong', 'Hong Kong', 2, '5C', 'parent014'),
-(15, 201900007, 'CHAN Yat Long', '陳逸朗', 'Male', '2012-08-24', 'Hong Kong', 'Hong Kong', 1, '5D', 'parent015'),
-(16, 201900008, 'CHEUNG Tsz Ying', '張芷瑩', 'Female', '2012-09-12', 'Hong Kong', 'Hong Kong', 2, '5D', 'parent016'),
-(17, 202000001, 'CHAN Sze Hang', '陳思行', 'Male', '2013-07-06', 'Hong Kong', 'Hong Kong', 1, '4A', 'parent017'),
-(18, 202000002, 'CHEUNG Ka Man', '張嘉敏', 'Female', '2013-08-14', 'Hong Kong', 'Hong Kong', 2, '4A', 'parent018'),
-(19, 202000003, 'CHAN Cheuk Him', '陳卓謙', 'Male', '2013-06-30', 'Hong Kong', 'Hong Kong', 1, '4B', 'parent019'),
-(20, 202000004, 'CHEUNG Hoi Ting', '張凱婷', 'Female', '2013-08-16', 'Hong Kong', 'Hong Kong', 2, '4B', 'parent020'),
-(21, 202000005, 'CHAN Ka Hei', '陳家熙', 'Male', '2013-09-13', 'Hong Kong', 'Hong Kong', 1, '4C', 'parent021'),
-(22, 202000006, 'CHEUNG Lok Yan', '張樂恩', 'Female', '2013-07-27', 'Hong Kong', 'Hong Kong', 2, '4C', 'parent022'),
-(23, 202000007, 'CHAN Chun Hei', '陳俊希', 'Male', '2013-04-22', 'Hong Kong', 'Hong Kong', 1, '4D', 'parent023'),
-(24, 202000008, 'CHEUNG Sum Yau', '張心柔', 'Female', '2013-02-14', 'Hong Kong', 'Hong Kong', 2, '4D', 'parent024');
+(1, 's20180001', 'CHAN Yi Shun', '陳以信', 'Male', '2011-08-14', 'Hong Kong', 'Hong Kong', 6, 'A', 'p20180001'),
+(2, 's20180002', 'CHEUNG Tsz Yu', '張芷如', 'Female', '2011-07-15', 'Hong Kong', 'Hong Kong', 6, 'A', 'p20180002'),
+(3, 's20180003', 'CHAN Ka Chun', '陳嘉俊', 'Male', '2011-11-28', 'Hong Kong', 'Hong Kong', 6, 'B', 'p20180003'),
+(4, 's20180004', 'CHEUNG Ka Yan', '張家欣', 'Female', '2011-04-11', 'Hong Kong', 'Hong Kong', 6, 'B', 'p20180004'),
+(5, 's20180005', 'CHAN Lok Hang', '陳樂行', 'Male', '2011-08-08', 'Hong Kong', 'Hong Kong', 6, 'C', 'p20180005'),
+(6, 's20180006', 'CHEUNG Tin Yan', '張天恩', 'Female', '2011-08-31', 'Hong Kong', 'Hong Kong', 6, 'C', 'p20180006'),
+(7, 's20180007', 'CHAN Ka Ho', '陳家豪', 'Male', '2011-10-27', 'Hong Kong', 'Hong Kong', 6, 'D', 'p20180007'),
+(8, 's20180008', 'CHEUNG Mei Ling', '張美玲', 'Female', '2011-06-17', 'Hong Kong', 'Hong Kong', 6, 'D', 'p20180008'),
+(9, 's20190001', 'CHAN Chun Kit', '陳俊傑', 'Male', '2012-09-14', 'Hong Kong', 'Hong Kong', 5, 'A', 'p20190001'),
+(10, 's20190002', 'CHEUNG Hiu Ching', '張曉晴', 'Female', '2012-06-27', 'Hong Kong', 'Hong Kong', 5, 'A', 'p20190002'),
+(11, 's20190003', 'CHAN Yu Hin', '陳宇軒', 'Male', '2012-04-29', 'Hong Kong', 'Hong Kong', 5, 'B', 'p20190003'),
+(12, 's20190004', 'CHEUNG Ka Yi', '張嘉儀', 'Female', '2012-06-27', 'Hong Kong', 'Hong Kong', 5, 'B', 'p20190004'),
+(13, 's20190005', 'CHAN Ho Yin', '陳浩賢', 'Male', '2012-09-04', 'Hong Kong', 'Hong Kong', 5, 'C', 'p20190005'),
+(14, 's20190006', 'CHEUNG Sze Nga', '張詩雅', 'Female', '2012-06-24', 'Hong Kong', 'Hong Kong', 5, 'C', 'p20190005'),
+(15, 's20190007', 'CHAN Yat Long', '陳逸朗', 'Male', '2012-08-24', 'Hong Kong', 'Hong Kong', 5, 'D', 'p20190006'),
+(16, 's20190008', 'CHEUNG Tsz Ying', '張芷瑩', 'Female', '2012-09-12', 'Hong Kong', 'Hong Kong', 5, 'D', 'p20190008'),
+(17, 's20200001', 'CHAN Sze Hang', '陳思行', 'Male', '2013-07-06', 'Hong Kong', 'Hong Kong', 4, 'A', 'p20200001'),
+(18, 's20200002', 'CHEUNG Ka Man', '張嘉敏', 'Female', '2013-08-14', 'Hong Kong', 'Hong Kong', 4, 'A', 'p20200002'),
+(19, 's20200003', 'CHAN Cheuk Him', '陳卓謙', 'Male', '2013-06-30', 'Hong Kong', 'Hong Kong', 4, 'B', 'p20200003'),
+(20, 's20200004', 'CHEUNG Hoi Ting', '張凱婷', 'Female', '2013-08-16', 'Hong Kong', 'Hong Kong', 4, 'B', 'p20200004'),
+(21, 's20200005', 'CHAN Ka Hei', '陳家熙', 'Male', '2013-09-13', 'Hong Kong', 'Hong Kong', 4, 'C', 'p20200005'),
+(22, 's20200006', 'CHEUNG Lok Yan', '張樂恩', 'Female', '2013-07-27', 'Hong Kong', 'Hong Kong', 4, 'C', 'p20200006'),
+(23, 's20200007', 'CHAN Chun Hei', '陳俊希', 'Male', '2013-04-22', 'Hong Kong', 'Hong Kong', 4, 'D', 'p20200007'),
+(24, 's20200008', 'CHEUNG Sum Yau', '張心柔', 'Female', '2013-02-14', 'Hong Kong', 'Hong Kong', 4, 'D', 'p20200008'),
+(26, 's20230001', '123', '123', 'male', '2023-05-16', 'Hong Kong', '123', 1, 'B', 'p20230001');
 
 -- --------------------------------------------------------
 
