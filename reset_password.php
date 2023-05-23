@@ -1,13 +1,21 @@
 <?php
-
 session_start();
-require_once('../../connectdb.php');
+require_once('connectdb.php');
 
 header('Content-Type: application/json');
 $response = array();
 
-if (isset($_POST['loginID']) && isset($_POST['newPassword']) && isset($_POST['confirmPassword'])) {
-    $username = $_POST['loginID'];
+if (!isset($_POST['username'])) {
+    $response['success'] = false;
+    $response['error'] = 'Username is required.';
+} elseif (!isset($_POST['newPassword'])) {
+    $response['success'] = false;
+    $response['error'] = 'New password is required.';
+} elseif (!isset($_POST['confirmPassword'])) {
+    $response['success'] = false;
+    $response['error'] = 'Confirm password is required.';
+} else {
+    $username = $_POST['username'];
     $new_password = $_POST['newPassword'];
     $confirm_password = $_POST['confirmPassword'];
 
@@ -18,8 +26,8 @@ if (isset($_POST['loginID']) && isset($_POST['newPassword']) && isset($_POST['co
 
         if ($user) {
             $hashed_password = md5($new_password);
-            $stmt2 = $pdo->prepare("UPDATE `login` SET `loginPassword` = :hashed_password ,`state` = 'Active' WHERE `loginID` = :loginID");
-            $stmt2->execute([':hashed_password' => $hashed_password, ':loginID' => $user['loginID']]);
+            $stmt2 = $pdo->prepare("UPDATE `login` SET `loginPassword` = :hashed_password, `state` = 'Active', `LastPwdChangeDate` = NOW() WHERE (loginID = :username OR loginName = :username OR loginEmail = :username)");
+            $stmt2->execute([':hashed_password' => $hashed_password, ':username' => $username]);
 
             $response['success'] = true;
         } else {
@@ -30,9 +38,6 @@ if (isset($_POST['loginID']) && isset($_POST['newPassword']) && isset($_POST['co
         $response['success'] = false;
         $response['error'] = 'Passwords do not match';
     }
-} else {
-    $response['success'] = false;
-    $response['error'] = 'Invalid request';
 }
 
 echo json_encode($response);

@@ -8,7 +8,6 @@ $loginPassword = md5($_POST["loginPassword"]);
 $securityQ = $_POST["securityQ"];
 $securityAns = md5($_POST["securityAns"]);
 
-// Check if Login Name already exists
 $stmt = $pdo->prepare("SELECT COUNT(*) FROM login WHERE loginName = ?");
 $stmt->execute([$loginName]);
 $count = $stmt->fetchColumn();
@@ -17,7 +16,6 @@ if ($count > 0) {
     exit();
 }
 
-// Get new Login ID
 $stmt = $pdo->prepare("SELECT loginID FROM login WHERE loginID LIKE :pattern ORDER BY loginID DESC LIMIT 1");
 $pattern = date('Y') . '%';
 $stmt->bindParam(':pattern', $pattern);
@@ -30,7 +28,6 @@ if ($lastLoginID) {
     $newID = date('Y') . '0001';
 }
 
-// Insert new account
 $stmt = $pdo->prepare("INSERT INTO login (loginID, type, loginName, loginEmail, loginPassword, securityQ, securityAns) VALUES (?, ?, ?, ?, ?, ?, ?)");
 $stmt->bindParam(1, $newID);
 $stmt->bindParam(2, $type);

@@ -1,6 +1,25 @@
 <?php
 require_once('../../connectdb.php');
 
+function getNewLoginId() {
+    global $pdo;
+    $currentYear = date('Y');
+
+    $sql = "SELECT MAX(`loginID`) AS maxLoginId FROM `login` WHERE `loginID` LIKE '%$currentYear%'";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($result['maxLoginId']) {
+        $lastNumber = (int) substr($result['maxLoginId'], -4);
+        $newNumber = $lastNumber + 1;
+        $formattedNumber = str_pad($newNumber, 4, "0", STR_PAD_LEFT);
+        return $currentYear . $formattedNumber;
+    } else {
+        return $currentYear . '0001';
+    }
+}
+
 try {
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $studentRegNumber = getNewStudentRegNumber();
@@ -38,10 +57,11 @@ try {
 
         $studentLoginName = $studentRegNumber;
         $studentLoginEmail = $studentRegNumber . '@sms.com';
-        $studentLoginPassword = 'S@' . $studentRegNumber;
+        $studentLoginPassword = md5('S@' . $studentRegNumber);
         $studentSecurityQ = '';
         $studentSecurityAns = '';
         $studentType = 'S';
+        $studentLoginId = getNewLoginId();
 
         $stmtStudentLogin = $pdo->prepare("SELECT COUNT(*) FROM login WHERE loginName = ?");
         $stmtStudentLogin->execute([$studentLoginName]);
@@ -51,17 +71,19 @@ try {
             exit();
         }
 
-        $stmtStudentAccount = $pdo->prepare("INSERT INTO login (type, loginName, loginEmail, loginPassword, securityQ, securityAns, state) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        $stmtStudentAccount->bindParam(1, $studentType);
-        $stmtStudentAccount->bindParam(2, $studentLoginName);
-        $stmtStudentAccount->bindParam(3, $studentLoginEmail);
-        $stmtStudentAccount->bindParam(4, $studentLoginPassword);
-        $stmtStudentAccount->bindParam(5, $studentSecurityQ);
-        $stmtStudentAccount->bindParam(6, $studentSecurityAns);
-        $stmtStudentAccount->bindValue(7, 1); // Set the default state to 1
+        $stmtStudentAccount = $pdo->prepare("INSERT INTO login (loginID,type, loginName, loginEmail, loginPassword, securityQ, securityAns, state) VALUES (?,?, ?, ?, ?, ?, ?, ?)");
+        $stmtStudentAccount->bindParam(1, $studentLoginId);
+        $stmtStudentAccount->bindParam(2, $studentType);
+        $stmtStudentAccount->bindParam(3, $studentLoginName);
+        $stmtStudentAccount->bindParam(4, $studentLoginEmail);
+        $stmtStudentAccount->bindParam(5, $studentLoginPassword);
+        $stmtStudentAccount->bindParam(6, $studentSecurityQ);
+        $stmtStudentAccount->bindParam(7, $studentSecurityAns);
+        $stmtStudentAccount->bindValue(8, 'Active');
 
         $stmtStudentAccount->execute();
 
+        $parentLoginId = getNewLoginId();
         $parentRegCode = $_POST["parentsRegCode"];
         $parentEngName = $_POST["parentEngName"];
         $parentChiName = $_POST["parentChiName"];
@@ -78,18 +100,33 @@ try {
             exit();
         }
 
-        $stmtParentAccount = $pdo->prepare("INSERT INTO login (type, loginName, loginEmail, loginPassword, securityQ, securityAns, state) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        $stmtParentAccount->bindValue(1, 'P');
-        $stmtParentAccount->bindParam(2, $parentRegCode);
-        $stmtParentAccount->bindValue(3, $parentRegCode . '@sms.com');
-        $stmtParentAccount->bindValue(4, 'S@' . $parentRegCode);
-        $stmtParentAccount->bindValue(5, '');
+
+        $stmtParentAccount = $pdo->prepare("INSERT INTO login (loginID,type, loginName, loginEmail, loginPassword, securityQ, securityAns, state) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmtParentAccount->bindParam(1, $parentLoginId);
+        $stmtParentAccount->bindValue(2, 'P');
+        $stmtParentAccount->bindParam(3, $parentRegCode);
+        $stmtParentAccount->bindValue(4, $parentRegCode . '@sms.com');
+        $stmtParentAccount->bindValue(5, md5('P@' . $parentRegCode));
         $stmtParentAccount->bindValue(6, '');
-        $stmtParentAccount->bindValue(7, 1);
+        $stmtParentAccount->bindValue(7, '');
+        $stmtParentAccount->bindValue(8, 'Active');
 
         $stmtParentAccount->execute();
 
-        echo "Successfully inserted data";
+        $sql2 = "INSERT INTO `parents`(`parentRegCode`, `parentEngName`, `parentChiName`, `parentSex`, `parentDateOfBirth`, `parentAddress`, `relationWithStudent`, `studentRegNumber`) 
+                VALUES (:parentRegCode, :parentEngName, :parentChiName, :parentSex, :parentDateOfBirth, :parentAddress, :relationWithStudent, :studentRegNumber)";
+
+        $stmt = $pdo->prepare($sql2);
+        $stmt->bindParam(':parentRegCode', $parentRegCode);
+        $stmt->bindParam(':parentEngName', $parentEngName);
+        $stmt->bindParam(':parentChiName', $parentChiName);
+        $stmt->bindParam(':parentSex', $parentSex);
+        $stmt->bindParam(':parentDateOfBirth', $parentDateOfBirth);
+        $stmt->bindParam(':parentAddress', $parentAddress);
+        $stmt->bindParam(':relationWithStudent', $relationWithStudent);
+        $stmt->bindParam(':studentRegNumber', $studentRegNumber);
+
+        echo '<script>alert("Successfully inserted data"); window.location.href = "registerStudent.php";</script>';      
     }
 } catch (PDOException $e) {
     die("Failed to insert data: " . $e->getMessage());
@@ -161,10 +198,9 @@ function getNewStudentRegNumber() {
                 <label>Parent Part:</label>
             <p>
                 <label for="parentsRegCode">Parent Registration Code:</label>
-                <input type="text" name="parentsRegCode" required><br>
+                <input type="text" name="parentsRegCode" value="<?php echo 'p' . substr(getNewStudentRegNumber(), -8); ?>" readonly><br>
 
 
-                <!-- Parent Information -->
                 <label for="parentEngName">Parent English Name:</label>
                 <input type="text" name="parentEngName" required><br>
 

@@ -183,7 +183,7 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     var data = $(this).serialize();
 
                     $.ajax({
-                        url: 'reset_password.php',
+                        url: 'list_reset_password.php',
                         type: 'POST',
                         data: data,
                         dataType: 'json',

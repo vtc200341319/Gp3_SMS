@@ -1,5 +1,4 @@
 $(document).ready(function () {
-    // Show the popup when clicking the "Reset Password" link
     $("#submit-username").on("click", function () {
         const username = $("#forgot-username").val();
         fetchSecurityQuestion(username);
@@ -28,22 +27,32 @@ $(document).ready(function () {
         }
     });
 
-    $("#submit-new-password").on("click", function () {
+     $("#submit-new-password").on("click", function () {
         var username = $("#forgot-username").val();
         var newPassword = $("#new-password").val();
-        var confirmPassword = $("#confirm-new-password").val();
-        resetPassword(username, newPassword, confirmPassword);
+        var confirmPassword = $("#confirm-password").val();
+        if (newPassword === confirmPassword) {
+            resetPassword(username, newPassword, confirmPassword);
+        } else {
+            alert("New Password and Confirm Password do not match.");
+        }
     });
 
-    $("#confirm-new-password").keypress(function (event) {
+    $("#confirm-password").keypress(function (event) {
         if (event.keyCode == 13 || event.which == 13) {
             event.preventDefault();
             var username = $("#forgot-username").val();
             var newPassword = $("#new-password").val();
-            var confirmPassword = $("#confirm-new-password").val();
-            resetPassword(username, newPassword, confirmPassword);
+            var confirmPassword = $("#confirm-password").val();
+            if (newPassword === confirmPassword) {
+                resetPassword(username, newPassword, confirmPassword);
+            } else {
+                alert("New Password and Confirm Password do not match.");
+            }
         }
     });
+
+
 });
 
 function showPopup() {
@@ -89,23 +98,23 @@ function validateSecurityAnswer(username, answer) {
         }
     }, "json");
 }
-
 function resetPassword(username, newPassword, confirmPassword) {
     const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
     if (!passwordPattern.test(newPassword)) {
         alert("Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character.");
         $("#new-password").val("");
-        $("#confirm-new-password").val("");
+        $("#confirm-password").val("");
         return;
     }
 
     if (newPassword !== confirmPassword) {
-        alert("New Password and Confirm New Password do not match.");
+        alert("New Password and Confirm Password do not match.");
         $("#new-password").val("");
-        $("#confirm-new-password").val("");
+        $("#confirm-password").val("");
         return;
     }
+
 
     $.ajax({
         url: "reset_password.php",
@@ -113,8 +122,8 @@ function resetPassword(username, newPassword, confirmPassword) {
         dataType: "json",
         data: {
             username: username,
-            new_password: newPassword,
-            confirm_password: confirmPassword,
+            newPassword: newPassword,
+            confirmPassword: confirmPassword,
         },
         success: function (response) {
             if (response.success) {
@@ -123,7 +132,7 @@ function resetPassword(username, newPassword, confirmPassword) {
                 $("#forgot-username").val("");
                 $("#security-answer").val("");
                 $("#new-password").val("");
-                $("#confirm-new-password").val("");
+                $("#confirm-password").val("");
                 $('#security-question').text("");
                 $('#security-question-container').hide();
                 $("#reset-password-container").hide();
@@ -146,4 +155,3 @@ function togglePasswordVisibility() {
         passwordField.type = "password";
     }
 }
-
