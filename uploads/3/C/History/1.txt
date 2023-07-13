@@ -1,0 +1,361 @@
+Tue Dec 13 22:34:45 2022   ISP1   Router>en
+Tue Dec 13 22:34:47 2022   ISP1   Router#conf t
+Tue Dec 13 22:34:54 2022   ISP1   Router(config)#hos ISP1
+Tue Dec 13 22:35:01 2022   ISP1   ISP1(config)#int g0/0
+Tue Dec 13 22:36:19 2022   ISP1   ISP1(config-if)#ip ad 200.1.1.1 255.255.255.0
+Tue Dec 13 22:36:22 2022   ISP1   ISP1(config-if)#no shu
+Tue Dec 13 22:36:27 2022   ISP1   ISP1(config-if)#int g0/1
+Tue Dec 13 22:36:45 2022   ISP1   ISP1(config-if)#ip ad 200.1.2.1 255.255.255.0
+Tue Dec 13 22:36:50 2022   ISP1   ISP1(config-if)#no shu
+Tue Dec 13 22:37:00 2022   ISP1   ISP1(config-if)#int g0/2
+Tue Dec 13 22:37:19 2022   ISP1   ISP1(config-if)#ip ad 210.0.0.254 255.255.255.0
+Tue Dec 13 22:37:24 2022   ISP1   ISP1(config-if)#no shu
+Tue Dec 13 22:37:28 2022   ISP1   ISP1(config-if)#ex
+Tue Dec 13 22:37:35 2022   ISP1   ISP1(config)#no ip domain-lookup 
+Tue Dec 13 22:37:47 2022   ISP1   ISP1(config)#end
+Tue Dec 13 22:37:52 2022   ISP1   ISP1#sho run
+Tue Dec 13 22:39:55 2022   ISP1   ISP1#en
+Tue Dec 13 22:39:57 2022   ISP1   ISP1#conf t
+Tue Dec 13 22:40:00 2022   ISP1   ISP1(config)#int g0/2
+Tue Dec 13 22:40:13 2022   ISP1   ISP1(config-if)#no ip ad 210.0.0.254 255.255.255.0
+Tue Dec 13 22:40:22 2022   ISP1   ISP1(config-if)#ip ad 1.1.1.1 255.255.255.0
+Tue Dec 13 22:40:25 2022   ISP1   ISP1(config-if)#no shu
+Tue Dec 13 22:41:25 2022   ISP2   Router>en
+Tue Dec 13 22:41:27 2022   ISP2   Router#con f
+Tue Dec 13 22:41:29 2022   ISP2   Router#conf t
+Tue Dec 13 22:41:31 2022   ISP2   Router(config)#hostname ISP2
+Tue Dec 13 22:41:31 2022   ISP2   ISP2(config)#no ip cef
+Tue Dec 13 22:41:31 2022   ISP2   ISP2(config)#no ipv6 cef
+Tue Dec 13 22:41:31 2022   ISP2   ISP2(config)#no ip domain-lookup
+Tue Dec 13 22:41:31 2022   ISP2   ISP2(config)#spanning-tree mode pvst
+Tue Dec 13 22:41:31 2022   ISP2   ISP2(config)#interface GigabitEthernet0/0
+Tue Dec 13 22:41:31 2022   ISP2   ISP2(config-if)#ip address 201.1.1.1 255.255.255.0
+Tue Dec 13 22:41:31 2022   ISP2   ISP2(config-if)#no shu
+Tue Dec 13 22:41:31 2022   ISP2   ISP2(config-if)#duplex auto
+Tue Dec 13 22:41:31 2022   ISP2   ISP2(config-if)#speed auto
+Tue Dec 13 22:41:31 2022   ISP2   ISP2(config-if)#interface GigabitEthernet0/1
+Tue Dec 13 22:41:31 2022   ISP2   ISP2(config-if)#ip address 201.1.2.1 255.255.255.0
+Tue Dec 13 22:41:31 2022   ISP2   ISP2(config-if)#no shu
+Tue Dec 13 22:41:31 2022   ISP2   ISP2(config-if)#duplex auto
+Tue Dec 13 22:41:31 2022   ISP2   ISP2(config-if)#speed auto
+Tue Dec 13 22:41:31 2022   ISP2   ISP2(config-if)#interface GigabitEthernet0/2
+Tue Dec 13 22:41:31 2022   ISP2   ISP2(config-if)#ip address 1.1.1.2 255.255.255.0
+Tue Dec 13 22:41:31 2022   ISP2   ISP2(config-if)#no shu
+Tue Dec 13 22:41:31 2022   ISP2   ISP2(config-if)#duplex auto
+Tue Dec 13 22:41:31 2022   ISP2   ISP2(config-if)#speed auto
+Tue Dec 13 22:42:53 2022   Remote   Router>en
+Tue Dec 13 22:42:55 2022   Remote   Router#conf t
+Tue Dec 13 22:42:56 2022   Remote   Router(config)#hostname Remote
+Tue Dec 13 22:42:56 2022   Remote   Remote(config)#no ip cef
+Tue Dec 13 22:42:56 2022   Remote   Remote(config)#no ipv6 cef
+Tue Dec 13 22:42:56 2022   Remote   Remote(config)#no ip domain-lookup
+Tue Dec 13 22:42:56 2022   Remote   Remote(config)#spanning-tree mode pvst
+Tue Dec 13 22:42:56 2022   Remote   Remote(config)#interface GigabitEthernet0/0
+Tue Dec 13 22:42:56 2022   Remote   Remote(config-if)#ip address 200.1.1.2 255.255.255.0
+Tue Dec 13 22:42:56 2022   Remote   Remote(config-if)#no shu
+Tue Dec 13 22:42:56 2022   Remote   Remote(config-if)#duplex auto
+Tue Dec 13 22:42:56 2022   Remote   Remote(config-if)#speed auto
+Tue Dec 13 22:42:56 2022   Remote   Remote(config-if)#interface GigabitEthernet0/1
+Tue Dec 13 22:42:56 2022   Remote   Remote(config-if)#ip address 201.1.1.2 255.255.255.0
+Tue Dec 13 22:42:56 2022   Remote   Remote(config-if)#no shu
+Tue Dec 13 22:42:56 2022   Remote   Remote(config-if)#duplex auto
+Tue Dec 13 22:42:56 2022   Remote   Remote(config-if)#speed auto
+Tue Dec 13 22:42:56 2022   Remote   Remote(config-if)#interface GigabitEthernet0/2
+Tue Dec 13 22:42:56 2022   Remote   Remote(config-if)#ip address 210.0.0.254 255.255.255.0
+Tue Dec 13 22:42:56 2022   Remote   Remote(config-if)#no shu
+Tue Dec 13 22:42:56 2022   Remote   Remote(config-if)#duplex auto
+Tue Dec 13 22:42:56 2022   Remote   Remote(config-if)#speed auto
+Tue Dec 13 22:43:35 2022   RemoteA   Router>en
+Tue Dec 13 22:43:36 2022   RemoteA   Router#conf t
+Tue Dec 13 22:43:38 2022   RemoteA   Router(config)#hostname RemoteA
+Tue Dec 13 22:43:38 2022   RemoteA   RemoteA(config)#no ip cef
+Tue Dec 13 22:43:38 2022   RemoteA   RemoteA(config)#no ipv6 cef
+Tue Dec 13 22:43:38 2022   RemoteA   RemoteA(config)#no ip domain-lookup
+Tue Dec 13 22:43:38 2022   RemoteA   RemoteA(config)#spanning-tree mode pvst
+Tue Dec 13 22:43:38 2022   RemoteA   RemoteA(config)#interface GigabitEthernet0/0
+Tue Dec 13 22:43:38 2022   RemoteA   RemoteA(config-if)#ip address 210.0.0.253 255.255.255.0
+Tue Dec 13 22:43:38 2022   RemoteA   RemoteA(config-if)#no shu
+Tue Dec 13 22:43:38 2022   RemoteA   RemoteA(config-if)#duplex auto
+Tue Dec 13 22:43:38 2022   RemoteA   RemoteA(config-if)#speed auto
+Tue Dec 13 22:43:38 2022   RemoteA   RemoteA(config-if)#interface GigabitEthernet0/1
+Tue Dec 13 22:43:38 2022   RemoteA   RemoteA(config-if)#ip address 172.17.2.1 255.255.255.0
+Tue Dec 13 22:43:38 2022   RemoteA   RemoteA(config-if)#no shu
+Tue Dec 13 22:43:38 2022   RemoteA   RemoteA(config-if)#duplex auto
+Tue Dec 13 22:43:38 2022   RemoteA   RemoteA(config-if)#speed auto
+Tue Dec 13 22:43:38 2022   RemoteA   RemoteA(config-if)#interface GigabitEthernet0/2
+Tue Dec 13 22:43:38 2022   RemoteA   RemoteA(config-if)#ip address 172.17.6.1 255.255.255.0
+Tue Dec 13 22:43:38 2022   RemoteA   RemoteA(config-if)#no shu
+Tue Dec 13 22:43:38 2022   RemoteA   RemoteA(config-if)#duplex auto
+Tue Dec 13 22:43:38 2022   RemoteA   RemoteA(config-if)#speed auto
+Tue Dec 13 22:44:20 2022   RemoteB   Router>en
+Tue Dec 13 22:44:21 2022   RemoteB   Router#conf t
+Tue Dec 13 22:44:22 2022   RemoteB   Router(config)#hostname RemoteB
+Tue Dec 13 22:44:22 2022   RemoteB   RemoteB(config)#no ip cef
+Tue Dec 13 22:44:22 2022   RemoteB   RemoteB(config)#no ipv6 cef
+Tue Dec 13 22:44:22 2022   RemoteB   RemoteB(config)#no ip domain-lookup
+Tue Dec 13 22:44:22 2022   RemoteB   RemoteB(config)#spanning-tree mode pvst
+Tue Dec 13 22:44:22 2022   RemoteB   RemoteB(config)#interface GigabitEthernet0/0
+Tue Dec 13 22:44:22 2022   RemoteB   RemoteB(config-if)#ip address 172.17.2.2 255.255.255.0
+Tue Dec 13 22:44:22 2022   RemoteB   RemoteB(config-if)#no shu
+Tue Dec 13 22:44:22 2022   RemoteB   RemoteB(config-if)#duplex auto
+Tue Dec 13 22:44:22 2022   RemoteB   RemoteB(config-if)#speed auto
+Tue Dec 13 22:44:22 2022   RemoteB   RemoteB(config-if)#interface GigabitEthernet0/1
+Tue Dec 13 22:44:22 2022   RemoteB   RemoteB(config-if)#ip address 172.17.0.1 255.255.255.0
+Tue Dec 13 22:44:22 2022   RemoteB   RemoteB(config-if)#no shu
+Tue Dec 13 22:44:22 2022   RemoteB   RemoteB(config-if)#duplex auto
+Tue Dec 13 22:44:22 2022   RemoteB   RemoteB(config-if)#speed auto
+Tue Dec 13 22:44:22 2022   RemoteB   RemoteB(config-if)#interface GigabitEthernet0/2
+Tue Dec 13 22:44:22 2022   RemoteB   RemoteB(config-if)#ip address 172.17.1.1 255.255.255.0
+Tue Dec 13 22:44:22 2022   RemoteB   RemoteB(config-if)#no shu
+Tue Dec 13 22:44:22 2022   RemoteB   RemoteB(config-if)#duplex auto
+Tue Dec 13 22:44:22 2022   RemoteB   RemoteB(config-if)#speed auto
+Tue Dec 13 22:44:56 2022   RemoteC   Router>no ip cef
+Tue Dec 13 22:46:00 2022   RemoteC   Router>en
+Tue Dec 13 22:46:01 2022   RemoteC   Router#conf t
+Tue Dec 13 22:46:03 2022   RemoteC   Router(config)#hostname RemoteC
+Tue Dec 13 22:46:03 2022   RemoteC   RemoteC(config)#no ip cef
+Tue Dec 13 22:46:03 2022   RemoteC   RemoteC(config)#no ipv6 cef
+Tue Dec 13 22:46:03 2022   RemoteC   RemoteC(config)#no ip domain-lookup
+Tue Dec 13 22:46:03 2022   RemoteC   RemoteC(config)#spanning-tree mode pvst
+Tue Dec 13 22:46:03 2022   RemoteC   RemoteC(config)#interface GigabitEthernet0/0
+Tue Dec 13 22:46:03 2022   RemoteC   RemoteC(config-if)#ip address 172.17.2.2 255.255.255.0
+Tue Dec 13 22:46:03 2022   RemoteC   RemoteC(config-if)#no shu
+Tue Dec 13 22:46:03 2022   RemoteC   RemoteC(config-if)#duplex auto
+Tue Dec 13 22:46:03 2022   RemoteC   RemoteC(config-if)#speed auto
+Tue Dec 13 22:46:03 2022   RemoteC   RemoteC(config-if)#interface GigabitEthernet0/1
+Tue Dec 13 22:46:03 2022   RemoteC   RemoteC(config-if)#ip address 172.17.4.1 255.255.255.0
+Tue Dec 13 22:46:03 2022   RemoteC   RemoteC(config-if)#no shu
+Tue Dec 13 22:46:03 2022   RemoteC   RemoteC(config-if)#duplex auto
+Tue Dec 13 22:46:03 2022   RemoteC   RemoteC(config-if)#speed auto
+Tue Dec 13 22:46:03 2022   RemoteC   RemoteC(config-if)#interface GigabitEthernet0/2
+Tue Dec 13 22:46:03 2022   RemoteC   RemoteC(config-if)#ip address 172.17.5.1 255.255.255.0
+Tue Dec 13 22:46:03 2022   RemoteC   RemoteC(config-if)#no shu
+Tue Dec 13 22:46:03 2022   RemoteC   RemoteC(config-if)#duplex auto
+Tue Dec 13 22:46:03 2022   RemoteC   RemoteC(config-if)#speed auto
+Tue Dec 13 22:46:14 2022   HQ   Router>en
+Tue Dec 13 22:46:15 2022   HQ   Router#conf t
+Tue Dec 13 22:46:16 2022   HQ   Router(config)#hostname HQ
+Tue Dec 13 22:46:16 2022   HQ   HQ(config)#no ip cef
+Tue Dec 13 22:46:16 2022   HQ   HQ(config)#no ipv6 cef
+Tue Dec 13 22:46:16 2022   HQ   HQ(config)#no ip domain-lookup
+Tue Dec 13 22:46:16 2022   HQ   HQ(config)#spanning-tree mode pvst
+Tue Dec 13 22:46:16 2022   HQ   HQ(config)#interface GigabitEthernet0/0
+Tue Dec 13 22:46:16 2022   HQ   HQ(config-if)#ip address 200.1.2.2 255.255.255.0
+Tue Dec 13 22:46:16 2022   HQ   HQ(config-if)#no shu
+Tue Dec 13 22:46:16 2022   HQ   HQ(config-if)#duplex auto
+Tue Dec 13 22:46:16 2022   HQ   HQ(config-if)#speed auto
+Tue Dec 13 22:46:16 2022   HQ   HQ(config-if)#interface GigabitEthernet0/1
+Tue Dec 13 22:46:16 2022   HQ   HQ(config-if)#ip address 201.1.2.2 255.255.255.0
+Tue Dec 13 22:46:16 2022   HQ   HQ(config-if)#no shu
+Tue Dec 13 22:46:16 2022   HQ   HQ(config-if)#duplex auto
+Tue Dec 13 22:46:16 2022   HQ   HQ(config-if)#speed auto
+Tue Dec 13 22:46:16 2022   HQ   HQ(config-if)#interface GigabitEthernet0/2
+Tue Dec 13 22:46:16 2022   HQ   HQ(config-if)#ip address 200.0.0.254 255.255.255.0
+Tue Dec 13 22:46:16 2022   HQ   HQ(config-if)#no shu
+Tue Dec 13 22:46:16 2022   HQ   HQ(config-if)#duplex auto
+Tue Dec 13 22:46:16 2022   HQ   HQ(config-if)#speed auto
+Tue Dec 13 22:47:04 2022   HQ1   Router>en
+Tue Dec 13 22:47:05 2022   HQ1   Router#conf t
+Tue Dec 13 22:47:06 2022   HQ1   Router(config)#hostname HQ1
+Tue Dec 13 22:47:06 2022   HQ1   HQ1(config)#no ip cef
+Tue Dec 13 22:47:06 2022   HQ1   HQ1(config)#no ipv6 cef
+Tue Dec 13 22:47:06 2022   HQ1   HQ1(config)#no ip domain-lookup
+Tue Dec 13 22:47:06 2022   HQ1   HQ1(config)#spanning-tree mode pvst
+Tue Dec 13 22:47:06 2022   HQ1   HQ1(config)#interface GigabitEthernet0/0
+Tue Dec 13 22:47:06 2022   HQ1   HQ1(config-if)#ip address 220.0.0.253 255.255.255.0
+Tue Dec 13 22:47:06 2022   HQ1   HQ1(config-if)#no shu
+Tue Dec 13 22:47:06 2022   HQ1   HQ1(config-if)#duplex auto
+Tue Dec 13 22:47:06 2022   HQ1   HQ1(config-if)#speed auto
+Tue Dec 13 22:47:06 2022   HQ1   HQ1(config-if)#interface GigabitEthernet0/1
+Tue Dec 13 22:47:06 2022   HQ1   HQ1(config-if)#ip address 172.16.8.1 255.255.255.0
+Tue Dec 13 22:47:06 2022   HQ1   HQ1(config-if)#no shu
+Tue Dec 13 22:47:06 2022   HQ1   HQ1(config-if)#duplex auto
+Tue Dec 13 22:47:06 2022   HQ1   HQ1(config-if)#speed auto
+Tue Dec 13 22:47:06 2022   HQ1   HQ1(config-if)#interface GigabitEthernet0/2
+Tue Dec 13 22:47:06 2022   HQ1   HQ1(config-if)#ip address 172.16.24.1 255.255.255.0
+Tue Dec 13 22:47:06 2022   HQ1   HQ1(config-if)#no shu
+Tue Dec 13 22:47:06 2022   HQ1   HQ1(config-if)#duplex auto
+Tue Dec 13 22:47:06 2022   HQ1   HQ1(config-if)#speed auto
+Tue Dec 13 22:47:48 2022   HQA1   Router>en
+Tue Dec 13 22:47:51 2022   HQA1   Router#conf t
+Tue Dec 13 22:47:53 2022   HQA1   Router(config)#hostname HQA1
+Tue Dec 13 22:47:53 2022   HQA1   HQA1(config)#no ip cef
+Tue Dec 13 22:47:53 2022   HQA1   HQA1(config)#no ipv6 cef
+Tue Dec 13 22:47:53 2022   HQA1   HQA1(config)#no ip domain-lookup
+Tue Dec 13 22:47:53 2022   HQA1   HQA1(config)#spanning-tree mode pvst
+Tue Dec 13 22:47:53 2022   HQA1   HQA1(config)#interface GigabitEthernet0/0
+Tue Dec 13 22:47:53 2022   HQA1   HQA1(config-if)#ip address 172.16.8.2 255.255.255.0
+Tue Dec 13 22:47:53 2022   HQA1   HQA1(config-if)#no shu
+Tue Dec 13 22:47:53 2022   HQA1   HQA1(config-if)#duplex auto
+Tue Dec 13 22:47:53 2022   HQA1   HQA1(config-if)#speed auto
+Tue Dec 13 22:47:53 2022   HQA1   HQA1(config-if)#interface GigabitEthernet0/1
+Tue Dec 13 22:47:53 2022   HQA1   HQA1(config-if)#ip address 172.16.2.1 255.255.255.0
+Tue Dec 13 22:47:53 2022   HQA1   HQA1(config-if)#no shu
+Tue Dec 13 22:47:53 2022   HQA1   HQA1(config-if)#duplex auto
+Tue Dec 13 22:47:53 2022   HQA1   HQA1(config-if)#speed auto
+Tue Dec 13 22:47:53 2022   HQA1   HQA1(config-if)#interface GigabitEthernet0/2
+Tue Dec 13 22:47:53 2022   HQA1   HQA1(config-if)#ip address 172.16.6.1 255.255.255.0
+Tue Dec 13 22:47:53 2022   HQA1   HQA1(config-if)#no shu
+Tue Dec 13 22:47:53 2022   HQA1   HQA1(config-if)#duplex auto
+Tue Dec 13 22:47:53 2022   HQA1   HQA1(config-if)#speed auto
+Tue Dec 13 22:48:06 2022   HQA1   HQA1(config-if)#hostname HQA1
+Tue Dec 13 22:48:06 2022   HQA1   HQA1(config)#no ip cef
+Tue Dec 13 22:48:06 2022   HQA1   HQA1(config)#no ipv6 cef
+Tue Dec 13 22:48:06 2022   HQA1   HQA1(config)#no ip domain-lookup
+Tue Dec 13 22:48:06 2022   HQA1   HQA1(config)#spanning-tree mode pvst
+Tue Dec 13 22:48:06 2022   HQA1   HQA1(config)#interface GigabitEthernet0/0
+Tue Dec 13 22:48:06 2022   HQA1   HQA1(config-if)#ip address 172.16.8.2 255.255.255.0
+Tue Dec 13 22:48:06 2022   HQA1   HQA1(config-if)#no shu
+Tue Dec 13 22:48:06 2022   HQA1   HQA1(config-if)#duplex auto
+Tue Dec 13 22:48:06 2022   HQA1   HQA1(config-if)#speed auto
+Tue Dec 13 22:48:06 2022   HQA1   HQA1(config-if)#interface GigabitEthernet0/1
+Tue Dec 13 22:48:06 2022   HQA1   HQA1(config-if)#ip address 172.16.2.1 255.255.255.0
+Tue Dec 13 22:48:06 2022   HQA1   HQA1(config-if)#no shu
+Tue Dec 13 22:48:06 2022   HQA1   HQA1(config-if)#duplex auto
+Tue Dec 13 22:48:06 2022   HQA1   HQA1(config-if)#speed auto
+Tue Dec 13 22:48:06 2022   HQA1   HQA1(config-if)#interface GigabitEthernet0/2
+Tue Dec 13 22:48:06 2022   HQA1   HQA1(config-if)#ip address 172.16.6.1 255.255.255.0
+Tue Dec 13 22:48:06 2022   HQA1   HQA1(config-if)#no shu
+Tue Dec 13 22:48:06 2022   HQA1   HQA1(config-if)#duplex auto
+Tue Dec 13 22:48:06 2022   HQA1   HQA1(config-if)#speed auto
+Tue Dec 13 22:48:29 2022   HQA1   HQA1(config-if)#int g0/0
+Tue Dec 13 22:48:31 2022   HQA1   HQA1(config-if)#no shu
+Tue Dec 13 22:48:36 2022   HQA1   HQA1(config-if)#clear
+Tue Dec 13 22:48:39 2022   HQA1   HQA1(config-if)#ex
+Tue Dec 13 22:48:41 2022   HQA1   HQA1(config)#clear
+Tue Dec 13 22:50:35 2022   HQA2   Router>en
+Tue Dec 13 22:50:36 2022   HQA2   Router#conf t
+Tue Dec 13 22:50:37 2022   HQA2   Router(config)#hostname HQA2
+Tue Dec 13 22:50:37 2022   HQA2   HQA2(config)#no ip cef
+Tue Dec 13 22:50:37 2022   HQA2   HQA2(config)#no ipv6 cef
+Tue Dec 13 22:50:37 2022   HQA2   HQA2(config)#no ip domain-lookup
+Tue Dec 13 22:50:37 2022   HQA2   HQA2(config)#spanning-tree mode pvst
+Tue Dec 13 22:50:37 2022   HQA2   HQA2(config)#interface GigabitEthernet0/0
+Tue Dec 13 22:50:37 2022   HQA2   HQA2(config-if)#ip address 172.16.2.2 255.255.255.0
+Tue Dec 13 22:50:37 2022   HQA2   HQA2(config-if)#no shu
+Tue Dec 13 22:50:37 2022   HQA2   HQA2(config-if)#duplex auto
+Tue Dec 13 22:50:37 2022   HQA2   HQA2(config-if)#speed auto
+Tue Dec 13 22:50:37 2022   HQA2   HQA2(config-if)#interface GigabitEthernet0/1
+Tue Dec 13 22:50:37 2022   HQA2   HQA2(config-if)#ip address 172.16.0.1 255.255.255.0
+Tue Dec 13 22:50:37 2022   HQA2   HQA2(config-if)#no shu
+Tue Dec 13 22:50:37 2022   HQA2   HQA2(config-if)#duplex auto
+Tue Dec 13 22:50:37 2022   HQA2   HQA2(config-if)#speed auto
+Tue Dec 13 22:50:37 2022   HQA2   HQA2(config-if)#interface GigabitEthernet0/2
+Tue Dec 13 22:50:37 2022   HQA2   HQA2(config-if)#ip address 172.16.1.1 255.255.255.0
+Tue Dec 13 22:50:37 2022   HQA2   HQA2(config-if)#no shu
+Tue Dec 13 22:50:37 2022   HQA2   HQA2(config-if)#duplex auto
+Tue Dec 13 22:50:37 2022   HQA2   HQA2(config-if)#speed auto
+Tue Dec 13 22:51:14 2022   HQA3   Router>en
+Tue Dec 13 22:51:15 2022   HQA3   Router#conf t
+Tue Dec 13 22:51:16 2022   HQA3   Router(config)#hostname HQA3
+Tue Dec 13 22:51:16 2022   HQA3   HQA3(config)#no ip cef
+Tue Dec 13 22:51:16 2022   HQA3   HQA3(config)#no ipv6 cef
+Tue Dec 13 22:51:16 2022   HQA3   HQA3(config)#no ip domain-lookup
+Tue Dec 13 22:51:16 2022   HQA3   HQA3(config)#spanning-tree mode pvst
+Tue Dec 13 22:51:16 2022   HQA3   HQA3(config)#interface GigabitEthernet0/0
+Tue Dec 13 22:51:16 2022   HQA3   HQA3(config-if)#ip address 172.16.6.2 255.255.255.0
+Tue Dec 13 22:51:16 2022   HQA3   HQA3(config-if)#no shu
+Tue Dec 13 22:51:16 2022   HQA3   HQA3(config-if)#duplex auto
+Tue Dec 13 22:51:16 2022   HQA3   HQA3(config-if)#speed auto
+Tue Dec 13 22:51:16 2022   HQA3   HQA3(config-if)#interface GigabitEthernet0/1
+Tue Dec 13 22:51:16 2022   HQA3   HQA3(config-if)#ip address 172.16.4.1 255.255.255.0
+Tue Dec 13 22:51:16 2022   HQA3   HQA3(config-if)#no shu
+Tue Dec 13 22:51:16 2022   HQA3   HQA3(config-if)#duplex auto
+Tue Dec 13 22:51:16 2022   HQA3   HQA3(config-if)#speed auto
+Tue Dec 13 22:51:16 2022   HQA3   HQA3(config-if)#interface GigabitEthernet0/2
+Tue Dec 13 22:51:16 2022   HQA3   HQA3(config-if)#ip address 172.16.5.1 255.255.255.0
+Tue Dec 13 22:51:16 2022   HQA3   HQA3(config-if)#no shu
+Tue Dec 13 22:51:16 2022   HQA3   HQA3(config-if)#duplex auto
+Tue Dec 13 22:51:16 2022   HQA3   HQA3(config-if)#speed auto
+Tue Dec 13 22:51:53 2022   HQB1   Router>en
+Tue Dec 13 22:51:54 2022   HQB1   Router#conf t
+Tue Dec 13 22:51:55 2022   HQB1   Router(config)#hostname HQB1
+Tue Dec 13 22:51:55 2022   HQB1   HQB1(config)#no ip cef
+Tue Dec 13 22:51:55 2022   HQB1   HQB1(config)#no ipv6 cef
+Tue Dec 13 22:51:55 2022   HQB1   HQB1(config)#no ip domain-lookup
+Tue Dec 13 22:51:55 2022   HQB1   HQB1(config)#spanning-tree mode pvst
+Tue Dec 13 22:51:55 2022   HQB1   HQB1(config)#interface GigabitEthernet0/0
+Tue Dec 13 22:51:55 2022   HQB1   HQB1(config-if)#ip address 172.16.24.2 255.255.255.0
+Tue Dec 13 22:51:55 2022   HQB1   HQB1(config-if)#no shu
+Tue Dec 13 22:51:55 2022   HQB1   HQB1(config-if)#duplex auto
+Tue Dec 13 22:51:55 2022   HQB1   HQB1(config-if)#speed auto
+Tue Dec 13 22:51:55 2022   HQB1   HQB1(config-if)#interface GigabitEthernet0/1
+Tue Dec 13 22:51:55 2022   HQB1   HQB1(config-if)#ip address 172.16.18.1 255.255.255.0
+Tue Dec 13 22:51:55 2022   HQB1   HQB1(config-if)#no shu
+Tue Dec 13 22:51:55 2022   HQB1   HQB1(config-if)#duplex auto
+Tue Dec 13 22:51:55 2022   HQB1   HQB1(config-if)#speed auto
+Tue Dec 13 22:51:55 2022   HQB1   HQB1(config-if)#interface GigabitEthernet0/2
+Tue Dec 13 22:51:55 2022   HQB1   HQB1(config-if)#ip address 172.16.22.1 255.255.255.0
+Tue Dec 13 22:51:55 2022   HQB1   HQB1(config-if)#no shu
+Tue Dec 13 22:51:55 2022   HQB1   HQB1(config-if)#duplex auto
+Tue Dec 13 22:51:55 2022   HQB1   HQB1(config-if)#speed auto
+Tue Dec 13 22:53:00 2022   HQB2   Router>en
+Tue Dec 13 22:53:01 2022   HQB2   Router#conf t
+Tue Dec 13 22:53:02 2022   HQB2   Router(config)#hostname HQB2
+Tue Dec 13 22:53:02 2022   HQB2   HQB2(config)#no ip cef
+Tue Dec 13 22:53:02 2022   HQB2   HQB2(config)#no ipv6 cef
+Tue Dec 13 22:53:02 2022   HQB2   HQB2(config)#no ip domain-lookup
+Tue Dec 13 22:53:02 2022   HQB2   HQB2(config)#spanning-tree mode pvst
+Tue Dec 13 22:53:02 2022   HQB2   HQB2(config)#interface GigabitEthernet0/0
+Tue Dec 13 22:53:02 2022   HQB2   HQB2(config-if)#ip address 172.16.18.2 255.255.255.0
+Tue Dec 13 22:53:02 2022   HQB2   HQB2(config-if)#no shu
+Tue Dec 13 22:53:02 2022   HQB2   HQB2(config-if)#duplex auto
+Tue Dec 13 22:53:02 2022   HQB2   HQB2(config-if)#speed auto
+Tue Dec 13 22:53:02 2022   HQB2   HQB2(config-if)#interface GigabitEthernet0/1
+Tue Dec 13 22:53:02 2022   HQB2   HQB2(config-if)#ip address 172.16.16.1 255.255.255.0
+Tue Dec 13 22:53:02 2022   HQB2   HQB2(config-if)#no shu
+Tue Dec 13 22:53:02 2022   HQB2   HQB2(config-if)#duplex auto
+Tue Dec 13 22:53:02 2022   HQB2   HQB2(config-if)#speed auto
+Tue Dec 13 22:53:02 2022   HQB2   HQB2(config-if)#interface GigabitEthernet0/2
+Tue Dec 13 22:53:02 2022   HQB2   HQB2(config-if)#ip address 172.16.17.1 255.255.255.0
+Tue Dec 13 22:53:02 2022   HQB2   HQB2(config-if)#no shu
+Tue Dec 13 22:53:02 2022   HQB2   HQB2(config-if)#duplex auto
+Tue Dec 13 22:53:02 2022   HQB2   HQB2(config-if)#speed auto
+Tue Dec 13 22:53:11 2022   HQB3   Router>en
+Tue Dec 13 22:53:12 2022   HQB3   Router#conf t
+Tue Dec 13 22:53:42 2022   HQB3   Router(config)#hostname HQB3
+Tue Dec 13 22:53:42 2022   HQB3   HQB3(config)#no ip cef
+Tue Dec 13 22:53:42 2022   HQB3   HQB3(config)#no ipv6 cef
+Tue Dec 13 22:53:42 2022   HQB3   HQB3(config)#no ip domain-lookup
+Tue Dec 13 22:53:42 2022   HQB3   HQB3(config)#spanning-tree mode pvst
+Tue Dec 13 22:53:42 2022   HQB3   HQB3(config)#interface GigabitEthernet0/0
+Tue Dec 13 22:53:42 2022   HQB3   HQB3(config-if)#ip address 172.16.22.2 255.255.255.0
+Tue Dec 13 22:53:42 2022   HQB3   HQB3(config-if)#no shu
+Tue Dec 13 22:53:42 2022   HQB3   HQB3(config-if)#duplex auto
+Tue Dec 13 22:53:42 2022   HQB3   HQB3(config-if)#speed auto
+Tue Dec 13 22:53:42 2022   HQB3   HQB3(config-if)#interface GigabitEthernet0/1
+Tue Dec 13 22:53:42 2022   HQB3   HQB3(config-if)#ip address 172.16.20.1 255.255.255.0
+Tue Dec 13 22:53:42 2022   HQB3   HQB3(config-if)#no shu
+Tue Dec 13 22:53:42 2022   HQB3   HQB3(config-if)#duplex auto
+Tue Dec 13 22:53:42 2022   HQB3   HQB3(config-if)#speed auto
+Tue Dec 13 22:53:42 2022   HQB3   HQB3(config-if)#interface GigabitEthernet0/2
+Tue Dec 13 22:53:42 2022   HQB3   HQB3(config-if)#ip address 172.16.21.1 255.255.255.0
+Tue Dec 13 22:53:42 2022   HQB3   HQB3(config-if)#no shu
+Tue Dec 13 22:53:42 2022   HQB3   HQB3(config-if)#duplex auto
+Tue Dec 13 22:53:42 2022   HQB3   HQB3(config-if)#speed auto
+Tue Dec 13 23:56:33 2022   ISP1   ISP1>en
+Tue Dec 13 23:56:33 2022   ISP1   ISP1#conf
+Tue Dec 13 23:56:33 2022   ISP1   ISP1#neighbor 200.1.1.2 remote-as 50000
+Tue Dec 13 23:56:33 2022   ISP1   ISP1#neighbor 200.1.2.2 remote-as 50001
+Tue Dec 13 23:56:33 2022   ISP1   ISP1#neighbor 1.1.1.3 remote-as 60000
+Tue Dec 13 23:56:33 2022   ISP1   ISP1#network 200.1.1.0 mask 255.255.255.0
+Tue Dec 13 23:56:33 2022   ISP1   ISP1#network 200.1.2.0 mask 255.255.255.0
+Tue Dec 13 23:56:33 2022   ISP1   ISP1#network 1.1.1.0 mask 255.255.255.0
+Tue Dec 13 23:56:55 2022   ISP1   ISP1#en
+Tue Dec 13 23:56:55 2022   ISP1   ISP1#conf t
+Tue Dec 13 23:56:55 2022   ISP1   ISP1(config)#router bgp 65000
+Tue Dec 13 23:56:55 2022   ISP1   ISP1(config-router)#neighbor 200.1.1.2 remote-as 50000
+Tue Dec 13 23:56:55 2022   ISP1   ISP1(config-router)#neighbor 200.1.2.2 remote-as 50001
+Tue Dec 13 23:56:55 2022   ISP1   ISP1(config-router)#neighbor 1.1.1.3 remote-as 60000
+Tue Dec 13 23:56:55 2022   ISP1   ISP1(config-router)#network 200.1.1.0 mask 255.255.255.0
+Tue Dec 13 23:56:55 2022   ISP1   ISP1(config-router)#network 200.1.2.0 mask 255.255.255.0
+Tue Dec 13 23:56:55 2022   ISP1   ISP1(config-router)#network 1.1.1.0 mask 255.255.255.0
+Tue Dec 13 23:59:19 2022   ISP2   ISP2>en
+Tue Dec 13 23:59:19 2022   ISP2   ISP2#conf t
+Tue Dec 13 23:59:19 2022   ISP2   ISP2(config)#router bgp 65001
+Tue Dec 13 23:59:19 2022   ISP2   ISP2(config-router)#neighbor 201.1.1.2 remote-as 50000
+Tue Dec 13 23:59:19 2022   ISP2   ISP2(config-router)#neighbor 201.1.2.2 remote-as 50001
+Tue Dec 13 23:59:19 2022   ISP2   ISP2(config-router)#neighbor 1.1.1.3 remote-as 60000
+Tue Dec 13 23:59:19 2022   ISP2   ISP2(config-router)#network 200.1.1.0 mask 255.255.255.0
+Tue Dec 13 23:59:19 2022   ISP2   ISP2(config-router)#network 200.1.2.0 mask 255.255.255.0
+Tue Dec 13 23:59:21 2022   ISP2   ISP2(config-router)#network 1.1.1.0 mask 255.255.255.0

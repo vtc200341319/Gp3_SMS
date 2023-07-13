@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Update Personal Information</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 20px;
+            }
+            h1 {
+                text-align: center;
+            }
+
+            input[type="file"] {
+                display: block;
+                margin-bottom: 10px;
+            }
+
+            button {
+                display: block;
+                margin: 10px auto;
+            }
+
+            table {
+                width: 80%;
+                border-collapse: collapse;
+            }
+
+            th, td {
+                padding: 8px;
+                text-align: left;
+                border-bottom: 1px solid #ddd;
+            }
+
+            th {
+                background-color: #f2f2f2;
+            }
+
+            h1 {
+                color: #333;
+            }
+
+            button {
+                background-color: #4CAF50;
+                color: white;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+
+            button:hover {
+                background-color: #45a049;
+            }
+
+            table {
+                background-color: #f9f9f9;
+            }
+
+            td:first-child {
+                font-weight: bold;
+                color: #333;
+                width: 30%;
+            }
+
+            #confirmMessage {
+                display: none;
+                margin-top: 10px;
+                color: #333;
+                text-align: center;
+            }
+
+        </style>
+    </head>
+    <body>
+        <h1>Update Personal Information</h1>
+        <input type="file" id="imageFile" accept="image/*">
+        <button onclick="extractText()">Upload</button>
+        <br>
+        <div id="resultContainer"></div>
+        <div id="confirmMessage">***Please confirm the above information is correct.</div>
+        <button id="updateProfileBtn" onclick="updateProfile()" style="display: none;">Update Profile</button>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+            var resultData = {};
+            function extractText() {
+                var subscriptionKey = 'd34a7eef04c54ec6ae5c3f58e655c2b5';
+                var endpoint = 'https://schoolfypgp3-ocr.cognitiveservices.azure.com/';
+                var fileInput = document.getElementById('imageFile');
+                var file = fileInput.files[0];
+
+                var formData = new FormData();
+                formData.append('file', file);
+
+                $.ajax({
+                    url: endpoint + '/vision/v3.1/ocr',
+                    type: 'POST',
+                    processData: false,
+                    contentType: false,
+                    headers: {
+                        'Ocp-Apim-Subscription-Key': subscriptionKey
+                    },
+                    data: formData,
+                    success: function (result) {
+                        var table = $('<table/>');
+                        var fieldNames = ["Student No:", "Name of Applicant (English):", "Date of Birth (dd/mm/yyyy):", "Gender (M/F/Other):", "Place of Birth:", "Residential Address:"];
+                        var regions = result.regions;
+                        var lineCount = 0;
+                        for (var i = 0; i < regions.length; i++) {
+                            var lines = regions[i].lines;
+                            for (var j = 0; j < lines.length; j++) {
+                                lineCount++;
+                                if (lineCount < 8)
+                                    continue;
+                                var row = $('<tr/>');
+                                var cell = $('<td/>');
+                                cell.text(fieldNames[lineCount - 8]);
+                                row.append(cell);
+                                cell = $('<td/>');
+                                var words = lines[j].words;
+                                var lineText = '';
+                                for (var k = 0; k < words.length; k++) {
+                                    lineText += words[k].text + ' ';
+                                }
+                                cell.text(lineText.trim());
+                                row.append(cell);
+                                table.append(row);
+                                if (lineCount - 7 == fieldNames.length)
+                                    break;
+                            }
+                            if (lineCount - 7 == fieldNames.length)
+                                break;
+                        }
+                        $('#resultContainer').html(table);
+                        resultData = result;
+                        $('#confirmMessage').show();
+                        $('#updateProfileBtn').show();
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(error);
+                    }
+                });
+            }
+
+            function updateProfile() {
+                var tableRows = $('#resultContainer table tr');
+                var studentNo = tableRows.eq(0).find('td:nth-child(2)').text().trim();
+                var studentEngName = tableRows.eq(1).find('td:nth-child(2)').text().trim();
+                var studBirth = tableRows.eq(2).find('td:nth-child(2)').text().trim();
+                var studGender = tableRows.eq(3).find('td:nth-child(2)').text().trim();
+                var studPlace = tableRows.eq(4).find('td:nth-child(2)').text().trim();
+                var studAddress = tableRows.eq(5).find('td:nth-child(2)').text().trim();
+
+                $.ajax({
+                    url: 'updateP.php',
+                    type: 'POST',
+                    data: {
+                        studentNo: studentNo,
+                        studentEngName: studentEngName,
+                        studBirth: studBirth,
+                        studGender: studGender,
+                        studPlace: studPlace,
+                        studAddress: studAddress
+                    },
+                    success: function (response) {
+                        console.log(response);
+                        alert("Profile updated successfully.");
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(error);
+                    }
+                });
+            }
+
+
+        </script>
+    </body>
+</html>

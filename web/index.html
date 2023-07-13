@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Meeting Room</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0px;
+            background-color: #f5f5f5;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 3px;
+        }
+
+        #buttons {
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        #zero-roomId {
+            padding: 5px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        #joinBtn, #leaveBtn {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        #joinBtn:hover, #leaveBtn:hover {
+            background-color: #0056b3;
+        }
+
+        #videos {
+            display: flex;
+            justify-content: center;
+        }
+
+        video {
+            width: 45%;
+            height: 19%;
+            margin: 0 10px;
+            background-color: transparent;
+        }
+        
+        
+    </style>
+</head>
+<body>
+    <h1>Meeting Room</h1>
+    <div id="buttons">
+        <input id="zero-roomId" type="text" placeholder="Enter room ID" maxlength="6">
+        <button id="joinBtn" type="button">Join</button>
+        <button id="leaveBtn" type="button">Leave</button>
+    </div>
+    <div id="videos">
+        <video id="localVideo" autoplay muted playsinline>Local</video>
+        <video id="remoteVideo" autoplay playsinline>Remote</video>
+    </div>
+    <script src="main.js"></script>
+    <script src="adapter-latest.js"></script>
+</body>
+</html>
