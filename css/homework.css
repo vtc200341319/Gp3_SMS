@@ -1,0 +1,82 @@
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.calendar {
+    float: left;
+    width: 300px;
+    margin-right: 20px;
+    padding: 10px;
+    background-color: #f2f2f2;
+}
+
+.calendar h2 {
+    text-align: center;
+    color: #666;
+}
+
+.calendar table {
+    width: 100%;
+}
+
+.calendar th,
+.calendar td {
+    padding: 5px;
+    text-align: center;
+}
+
+.calendar th {
+    color: #666;
+}
+
+.calendar td {
+    color: #333;
+    cursor: pointer;
+}
+
+.current-day {
+    background-color: #ffcccc;
+    font-weight: bold;
+}
+
+.prev-month,
+.next-month {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.blackboard {
+    float: left;
+    width: 60%;
+    padding: 20px;
+    background-color: #274C43;
+    color: #fff;
+    border: 15px solid #301511;
+}
+
+.blackboard h2 {
+    margin-bottom: 10px;
+}
+
+.blackboard table {
+    width: 100%;
+    font-size: 18px;
+}
+
+.blackboard th,
+.blackboard td {
+    padding: 25px;
+    border-bottom: 1px solid #fff;
+}
+
+.blackboard td:first-child {
+    border-right: 1px solid #fff;
+    width: 10px;
+}
+
+.title {
+    background-color: #fff;
+    padding: 5px;
+    margin-bottom: 20px;
+}
